@@ -1,10 +1,15 @@
 Parameters:
   env: 
     Type: String
-    description: Environment name for site.
-
+    Description: Environment name for site.
+  
 Resources:
   MyBucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: crc-bucket
+      Tags:
+      - Key: Name
+        Value: crc-bucket
+      - Key: Environment
+        Value: !Ref env
