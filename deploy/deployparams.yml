@@ -2,4 +2,6 @@ template-file-path: deploy/template/CRCCloudFormation.yml
 
 parameters: 
     env: production
+    DomainName: robertpuffe.com
+    HostedZoneId: Z0308795E9NPDUEE9Y91
 tags:
