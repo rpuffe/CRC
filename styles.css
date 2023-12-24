@@ -1,0 +1,36 @@
+/* styles.css */
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+header {
+    text-align: center;
+}
+
+h1, h2, h3 {
+    color: #0b0303;
+}
+
+.contact-info {
+    margin-top: 20px;
+}
+
+.work-experience, .education {
+    margin-bottom: 30px;
+}
+
+.skills {
+    margin-bottom: 40px;
+}
+
+.project {
+    margin-bottom: 20px;
+}
+</style>
+
+/* Path: index.html */
