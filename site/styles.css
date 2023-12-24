@@ -11,10 +11,23 @@ header {
     text-align: center;
 }
 
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid #ccc;
+}
+
 h1, h2, h3 {
     color: #0b0303;
 }
 
+/* index */
+.links {
+    margin-bottom: 30px;
+}
+
+/* resume */
 .contact-info {
     margin-top: 20px;
 }
@@ -30,5 +43,6 @@ h1, h2, h3 {
 .project {
     margin-bottom: 20px;
 }
+
 
 /* Path: index.html */
