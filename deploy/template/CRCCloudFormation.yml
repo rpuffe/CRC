@@ -2,6 +2,12 @@ Parameters:
   env: 
     Type: String
     Description: Environment name for site.
+  # DomainName:
+  #   Type: String
+  #   Description: Domain name for site.
+  # HostedZoneId:
+  #   Type: String
+  #   Description: Hosted zone id for site.
   
 Resources:
   MyBucket:
@@ -13,3 +19,17 @@ Resources:
         Value: crc-bucket
       - Key: Environment
         Value: !Ref env
+
+    
+
+Outputs:
+  BucketName:
+    Description: Name of the bucket
+    Value: !Ref MyBucket
+    Export:
+      Name: !Sub "crc-bucket-${env}"
+  BucketArn:
+    Description: Arn of the bucket
+    Value: !GetAtt MyBucket.Arn
+    Export:
+      Name: !Sub "crc-bucket-arn-${env}"
