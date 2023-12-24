@@ -7,7 +7,7 @@ Resources:
   MyBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: crc-bucket
+      BucketName: !Sub "crc-bucket-${env}"
       Tags:
       - Key: Name
         Value: crc-bucket
