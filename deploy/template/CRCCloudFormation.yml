@@ -1,0 +1,10 @@
+Parameters:
+  env: 
+  Type: String
+  description: Environment name for site.
+  
+Resources:
+  MyBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: crc-bucket

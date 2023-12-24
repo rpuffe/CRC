@@ -1,0 +1,5 @@
+template-file-path: ./fargate-srvc/my-stack-template.yaml
+
+parameters: 
+    env: production
+tags:
