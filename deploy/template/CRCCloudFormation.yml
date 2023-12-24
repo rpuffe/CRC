@@ -8,19 +8,121 @@ Parameters:
   # HostedZoneId:
   #   Type: String
   #   Description: Hosted zone id for site.
-  
+
 Resources:
+  # s3 bucket for site
   MyBucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Sub "crc-bucket-${env}"
+      OwnershipControls:
+           Rules:
+                - ObjectOwnership: BucketOwnerPreferred
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
       Tags:
       - Key: Name
         Value: crc-bucket
       - Key: Environment
         Value: !Ref env
 
-    
+  MyBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref MyBucket
+      PolicyDocument:
+        Statement:
+          - Action: s3:GetObject
+            Effect: Allow
+            Resource: 
+              -  !Sub "${MyBucket.Arn}/*"
+              -  !GetAtt MyBucket.Arn
+            Principal: "*"
+
+  # CloudFront distribution for site
+
+  # Route53 record for site
+
+
+  # Deployment mechanism for site
+  CodeBuildProject:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Name: !Sub "crc-build-${env}"
+      Description: !Sub "Build project for ${env}"
+      ServiceRole: !GetAtt CodeBuildRole.Arn
+      Artifacts:
+        Type: CODEPIPELINE
+      Environment:
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: aws/codebuild/amazonlinux2-x86_64-standard:3.0
+        Type: LINUX_CONTAINER
+        EnvironmentVariables:
+          - Name: S3_BUCKET
+            Value: !Ref MyBucket
+          - Name: ENV
+            Value: !Ref env
+      Source:
+        Type: GITHUB
+        Location: https://github.com/rpuffe/CRC.git
+        BuildSpec: buildpec.yml
+      SourceVersion: main
+      Tags:
+        - Key: Name
+          Value: crc-build
+        - Key: Environment
+          Value: !Ref env
+  CodeBuildRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "crc-build-role-${env}"
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - codebuild.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: /
+      Policies:
+        - PolicyName: !Sub "crc-build-policy-${env}"
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: arn:aws:logs:*:*:*
+              - Effect: Allow
+                Action:
+                  - s3:*
+                Resource: !Sub "arn:aws:s3:::${MyBucket}/*"
+              - Effect: Allow
+                Action:
+                  - s3:ListBucket
+                Resource: !Sub "arn:aws:s3:::${MyBucket}"
+              - Effect: Allow
+                Action:
+                  - cloudfront:CreateInvalidation
+                Resource: !Sub "arn:aws:cloudfront::${AWS::AccountId}:distribution/*"
+              - Effect: Allow
+                Action:
+                  - cloudfront:GetDistribution
+                  - cloudfront:GetDistributionConfig
+                  - cloudfront:UpdateDistribution
+                Resource: "*"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess 
 
 Outputs:
   BucketName:

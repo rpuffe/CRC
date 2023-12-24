@@ -1,0 +1,16 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+    commands:
+      - echo "installing dependencies"
+      - npm install
+  build:
+    commands:
+      - echo "building site"
+      - npm run build
+  post_build:
+    commands:
+      - echo "copying files to s3"
+      - aws s3 sync ./site s3://${MyBucket}/ --delete
