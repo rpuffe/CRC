@@ -1,4 +1,4 @@
-template-file-path: ./template/CRCCloudFormation.yml
+template-file-path: deploy/template/CRCCloudFormation.yml
 
 parameters: 
     env: production
