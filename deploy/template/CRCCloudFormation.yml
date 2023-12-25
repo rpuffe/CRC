@@ -10,6 +10,8 @@ Parameters:
     Description: Hosted zone id for site.
 
 Resources:
+  
+  ### S3 RESOURCES ###
   # s3 bucket for site
   MyBucket:
     Type: AWS::S3::Bucket
@@ -50,7 +52,8 @@ Resources:
   # Route53 record for site
 
 
-  # Deployment mechanism for site
+  ## Deployment mechanism for site
+  # CodeBuild project for site
   CodeBuildProject:
     Type: AWS::CodeBuild::Project
     Properties:
@@ -58,7 +61,8 @@ Resources:
       Description: !Sub "Build project for ${env}"
       ServiceRole: !GetAtt CodeBuildRole.Arn
       Artifacts:
-        Type: GITHUB
+        Type: S3
+        Location: !Ref CodeBuildArtifactBucket
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
         Image: aws/codebuild/amazonlinux2-x86_64-standard:3.0
@@ -78,6 +82,7 @@ Resources:
           Value: crc-build
         - Key: Environment
           Value: !Ref env
+  # CodeBuild role for site
   CodeBuildRole:
     Type: AWS::IAM::Role
     Properties:
@@ -106,11 +111,17 @@ Resources:
               - Effect: Allow
                 Action:
                   - s3:*
-                Resource: !Sub "arn:aws:s3:::${MyBucket}/*"
+                Resource: 
+                  - !Sub "arn:aws:s3:::${MyBucket}/*"
+                  - !Sub "arn:aws:s3:::${MyBucket}"
+                  - !Sub "arn:aws:s3:::${CodeBuildArtifactBucket}/*"
+                  - !Sub "arn:aws:s3:::${CodeBuildArtifactBucket}"
               - Effect: Allow
                 Action:
                   - s3:ListBucket
-                Resource: !Sub "arn:aws:s3:::${MyBucket}"
+                Resource: 
+                  - !Sub "arn:aws:s3:::${MyBucket}"
+                  - !Sub "arn:aws:s3:::${CodeBuildArtifactBucket}"
               - Effect: Allow
                 Action:
                   - cloudfront:CreateInvalidation
@@ -123,6 +134,24 @@ Resources:
                 Resource: "*"
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AdministratorAccess 
+  
+  # Codebuild Artifact s3 bucket for site
+  CodeBuildArtifactBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "crc-build-artifact-${env}"
+      VersioningConfiguration:
+        Status: Enabled
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      Tags:
+      - Key: Name
+        Value: crc-build-artifact
+      - Key: Environment
+        Value: !Ref env
 
 Outputs:
   BucketName:
