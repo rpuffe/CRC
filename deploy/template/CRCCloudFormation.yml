@@ -47,10 +47,53 @@ Resources:
               -  !GetAtt MyBucket.Arn
             Principal: "*"
 
-  # CloudFront distribution for site
+  # CloudFront distribution for redirecting to s3 bucket
+  CloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Comment: CloudFront distribution for redirecting to S3 bucket
+        Enabled: true
+        DefaultRootObject: index.html
+        Origins:
+          - Id: MyBucketOrigin
+            DomainName: !GetAtt MyBucket.WebsiteURL
+            S3OriginConfig:
+              OriginAccessIdentity: ''
+        DefaultCacheBehavior:
+          TargetOriginId: MyBucketOrigin
+          ViewerProtocolPolicy: redirect-to-https
+          AllowedMethods:
+            - GET
+            - HEAD
+          CachedMethods:
+            - GET
+            - HEAD
+          ForwardedValues:
+            QueryString: false
+            Cookies:
+              Forward: none
+        PriceClass: PriceClass_100
+        ViewerCertificate:
+          CloudFrontDefaultCertificate: true
+        Tags:
+          - Key: Name
+            Value: crc-cloudfront
+          - Key: Environment
+            Value: !Ref env
+
+
 
   # Route53 record for site
-
+  Route53Record:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref HostedZoneId
+      Name: !Sub "${DomainName}."
+      Type: A
+      AliasTarget:
+        DNSName: !GetAtt CloudFront.DomainName
+        HostedZoneId: Z2FDTNDATAQYW2
 
   ## Deployment mechanism for site
   # CodeBuild project for site
