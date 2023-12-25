@@ -57,7 +57,7 @@ Resources:
         DefaultRootObject: index.html
         Origins:
           - Id: MyBucketOrigin
-            DomainName: !GetAtt MyBucket.WebsiteURL
+            DomainName: !GetAtt MyBucket.DomainName
             S3OriginConfig:
               OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${CloudFrontOriginAccessIdentity}"
         DefaultCacheBehavior:
