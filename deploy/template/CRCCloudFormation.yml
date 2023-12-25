@@ -59,7 +59,7 @@ Resources:
           - Id: MyBucketOrigin
             DomainName: !GetAtt MyBucket.WebsiteURL
             S3OriginConfig:
-              OriginAccessIdentity: ''
+              OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${CloudFrontOriginAccessIdentity}"
         DefaultCacheBehavior:
           TargetOriginId: MyBucketOrigin
           ViewerProtocolPolicy: redirect-to-https
@@ -82,7 +82,12 @@ Resources:
         #   - Key: Environment
         #     Value: !Ref env
 
-
+  # CloudFront origin access identity for s3 bucket
+  CloudFrontOriginAccessIdentity:
+    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: !Sub "origin-access-identity for ${MyBucket}"
 
   # Route53 record for site
   Route53Record:
