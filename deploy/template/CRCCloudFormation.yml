@@ -2,12 +2,12 @@ Parameters:
   env: 
     Type: String
     Description: Environment name for site.
-  # DomainName:
-  #   Type: String
-  #   Description: Domain name for site.
-  # HostedZoneId:
-  #   Type: String
-  #   Description: Hosted zone id for site.
+  DomainName:
+    Type: String
+    Description: Domain name for site.
+  HostedZoneId:
+    Type: String
+    Description: Hosted zone id for site.
 
 Resources:
   # s3 bucket for site
