@@ -75,7 +75,7 @@ Resources:
       Source:
         Type: GITHUB
         Location: https://github.com/rpuffe/CRC.git
-        BuildSpec: buildpec.yml
+        BuildSpec: buildspec.yml
       SourceVersion: main
       Tags:
         - Key: Name
