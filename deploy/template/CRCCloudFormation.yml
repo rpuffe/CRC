@@ -76,11 +76,11 @@ Resources:
         PriceClass: PriceClass_100
         ViewerCertificate:
           CloudFrontDefaultCertificate: true
-        Tags:
-          - Key: Name
-            Value: crc-cloudfront
-          - Key: Environment
-            Value: !Ref env
+        # Tags:
+        #   - Key: Name
+        #     Value: crc-cloudfront
+        #   - Key: Environment
+        #     Value: !Ref env
 
 
 
