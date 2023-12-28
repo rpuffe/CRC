@@ -75,7 +75,8 @@ Resources:
               Forward: none
         PriceClass: PriceClass_100
         ViewerCertificate:
-          CloudFrontDefaultCertificate: true
+          AcmCertificateArn: !Ref Certificate
+          SslSupportMethod: sni-only
         # Tags:
         #   - Key: Name
         #     Value: crc-cloudfront
@@ -88,6 +89,21 @@ Resources:
     Properties:
       CloudFrontOriginAccessIdentityConfig:
         Comment: !Sub "origin-access-identity for ${MyBucket}"
+
+  # Certificate
+  Certificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: !Ref DomainName
+      DomainValidationOptions:
+        - DomainName: !Ref DomainName
+          ValidationDomain: !Ref DomainName
+      ValidationMethod: DNS
+      Tags:
+        - Key: Name
+          Value: crc-certificate
+        - Key: Environment
+          Value: !Ref env
 
   # Route53 record for site
   Route53Record:
