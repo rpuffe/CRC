@@ -150,6 +150,13 @@ Resources:
         Type: GITHUB
         Location: https://github.com/rpuffe/CRC.git
         BuildSpec: buildspec.yml
+      Triggers:
+        Webhook: true
+        FilterGroups:
+          - - Type: EVENT
+              Pattern: PUSH,PULL_REQUEST_MERGED
+            - Type: FILE_PATH
+              Pattern: site/.
       SourceVersion: main
       Tags:
         - Key: Name
