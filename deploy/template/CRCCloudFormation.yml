@@ -52,6 +52,8 @@ Resources:
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
+        Aliases:
+          - !Ref DomainName
         Comment: CloudFront distribution for redirecting to S3 bucket
         Enabled: true
         DefaultRootObject: index.html
@@ -97,14 +99,22 @@ Resources:
       DomainName: !Ref DomainName
       DomainValidationOptions:
         - DomainName: !Ref DomainName
-          ValidationDomain: !Ref DomainName
+          HostedZoneId: !Ref HostedZoneId
       ValidationMethod: DNS
       Tags:
         - Key: Name
           Value: crc-certificate
         - Key: Environment
           Value: !Ref env
-
+  # DNSRecordValidate:
+  #   Type: AWS::Route53::RecordSet
+  #   Properties:
+  #     HostedZoneId: !Ref HostedZoneId
+  #     Name: !GetAtt Certificate.DomainValidationOptions.0.ResourceRecord.Name
+  #     Type: !GetAtt Certificate.DomainValidationOptions.0.ResourceRecord.Type
+  #     TTL: '300'
+  #     ResourceRecords:
+  #       - !GetAtt Certificate.DomainValidationOptions.0.ResourceRecord.value
   # Route53 record for site
   Route53Record:
     Type: AWS::Route53::RecordSet
