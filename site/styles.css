@@ -1,14 +1,26 @@
 /* styles.css */
-
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: ##f4f4f4;
+    --dark-color: #343a40;
+    --shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: var(--light-color);
+    box-shadow: var(--shadow);
 }
 
 header {
     text-align: center;
+    background-color: var(--light-color);
 }
 
 footer {
@@ -23,25 +35,43 @@ h1, h2, h3 {
 }
 
 /* index */
+.default {
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+}
 .links {
     margin-bottom: 30px;
+    padding: 5px;
 }
 
 /* resume */
 .contact-info {
-    margin-top: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+    padding: 5px;
+    border-radius: 10px;
 }
 
 .work-experience, .education {
     margin-bottom: 30px;
+    box-shadow: var(--shadow);
+    padding: 5px;
+    border-radius: 10px;
 }
 
 .skills {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+    padding: 5px;
+    border-radius: 10px;
 }
 
 .project {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+    padding: 5px;
+    border-radius: 10px;
 }
 
 
