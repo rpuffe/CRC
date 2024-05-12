@@ -14,3 +14,4 @@ phases:
     commands:
       - echo "copying files to s3"
       - aws s3 sync ./site s3://${S3_BUCKET}/ --delete
+      - aws cloudfront create-invalidation --distribution-id ${CloudFrontDistribution} --paths "/*"
