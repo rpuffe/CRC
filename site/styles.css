@@ -19,11 +19,13 @@ body {
     padding: 20px;
     background-color: var(--light-color);
     box-shadow: var(--shadow);
+    transition: var(--transition);
 }
 
 header {
     text-align: center;
     background-color: var(--light-color);
+    transition: var(--transition);
 }
 
 footer {
@@ -31,6 +33,7 @@ footer {
     margin-top: 30px;
     padding-top: 30px;
     border-top: 1px solid #ccc;
+    transition: var(--transition);
 }
 
 h1, h2, h3 {
@@ -41,10 +44,12 @@ h1, h2, h3 {
 .default {
     margin-bottom: 30px;
     box-shadow: var(--shadow);
+    transition: var(--transition);
 }
 .links {
     margin-bottom: 30px;
     padding: 5px;
+    transition: var(--transition);
 }
 
 /* resume */
@@ -77,6 +82,7 @@ h1, h2, h3 {
     box-shadow: var(--shadow);
     padding: 5px;
     border-radius: 10px;
+    transition: var(--transition);
 }
 
 .project {
@@ -84,6 +90,7 @@ h1, h2, h3 {
     box-shadow: var(--shadow);
     padding: 5px;
     border-radius: 10px;
+    transition: var(--transition);
 }
 
 
