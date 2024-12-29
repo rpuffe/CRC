@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stick Ponies - Country Band</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="sp-styles.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Load the navigation bar
+            fetch('nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('nav-placeholder').innerHTML = data;
+
+                    // Add functionality to the hamburger menu after nav is loaded
+                    const hamburger = document.querySelector('.hamburger');
+                    const navLinks = document.querySelectorAll('nav a');
+
+                    if (hamburger) {
+                        hamburger.addEventListener('click', () => {
+                            navLinks.forEach(link => {
+                                link.classList.toggle('show');
+                            });
+                        });
+                    } else {
+                        console.error("Hamburger button not found in nav.html");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error loading nav.html:", error);
+                });
+            fetch('contact-content.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('contact').innerHTML = data;
+                })
+                .catch(error => {
+                    console.error("Error loading contact-content.html:", error);
+                });
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.body.innerHTML += data;
+                });
+        });
+
+    </script>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+    <div class="hero">
+        <h2>Feel the Rhythm, Embrace the Country</h2>
+    </div>
+    <div class="video-container" style="width: 80%; max-width: 800px; margin: 0 auto;"></div>
+        <iframe width="100%" height="450" src="https://www.youtube.com/embed/2ewPBngehfM?si=VT3rrQLHU8dJHKNT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <section id="about">
+        <h2>About Us</h2>
+        <p>The Ponies Are: 
+            Grant Invie, Daron Lacina, Cale Thomas, Austin Lang, Linda Roesch, Robert Puffe, & Sephra Puffe</p>
+            <p>Old and classic country favorites with original songs and some tasty jams! Stick Ponies are always a boot scootin' blast!</p>
+        <img src="./images/logo_sp_pony.png" alt="Stick Ponies Logo">
+        <h2>Our Story</h2>
+        <p>The Stick Ponies owe their roots to open mic events in Jamestown. After playing together long enough and having too much fun, they began booking gigs and playing shows together. </p>  
+        <p> The Stick Ponies have a distinct sound that separates them from other groups. Covering a variety of songs with a splash of originals, this group is ready to entertain! </p>    
+        <p>If you love having a good time, you’ll love the Stick Ponies.
+            </p>
+    </section>
+    <section id="events">
+        <h2>Events</h2>
+        <p>Check out our Facebook page for new events!</p>
+        <a href="https://www.facebook.com/StickPoniesJamestown" target="_blank" style="font-size: 2em;"><i class="fab fa-facebook"></i></a>
+    </section>
+    <section id="contact"></section>
+</body>
+</html>

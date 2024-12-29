@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stick Ponies - Country Band</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="sp-styles.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('nav-placeholder').innerHTML = data;
+                });
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.body.innerHTML += data;
+                });
+        });
+    </script>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+    <section id="music" class="music">
+        <h2>Hear what we’ve been working on</h2>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/2ewPBngehfM?si=VT3rrQLHU8dJHKNT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </section>
+    <section id="album" class="events">
+        <h2>Daron's Picks - Live Album</h2>
+        <p>Check out our live album Daron’s Picks recorded on 9.17.2022 at the Fire Hall in Pingree, ND.</p>
+        <img src="images/albumcover.jpg" alt="Album Cover" style="width:100%;max-width:300px;">
+        <p>YouTube <a href="https://www.youtube.com/playlist?list=OLAK5uy_kYzl_5uE1Zgu8-l6madnZBBfJI1642_Ms" target="_blank"><i class="fab fa-youtube"></i> Daron’s Picks</a>
+        <p>Apple Music <a href="https://music.apple.com/us/artist/stick-ponies/1657886952" target="_blank"><i class="fab fa-apple"></i> Stick Ponies</a>
+        <p>Spotify <a href="https://open.spotify.com/artist/2hNUF5gGsTlMIMEWvhfvWm" target="_blank"><i class="fab fa-spotify"></i> Stick Ponies</a>
+    </section>
+    <section>
+        <h2>Our Other Cool Stuff</h2>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/S6Pkj9KTOP4?si=fm4TD72dI90TJSdt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/1704nrRY6lA?si=20sg5sCmQ__FKM37" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/wbM60XA_qPY?si=82hozogifoow0mme" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe src="https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/StickPoniesJamestown/videos/106870202516242/?st=3kLc07zjoqc&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+        <h3>Stick Ponies on KRFF 95.9 FM</h3>
+        <iframe src="https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/959krffthissideofcountry/videos/433097764962934/?__cft__%5B0%5D=AZVBgsvwU4gI9hvVfSLNX17d84-6QPkPCPra9RZelWPl64BfmlXSLTRPQtCxR7Tc27368XRHi2fyUVowfJvzFKtO76qmgYzz2ckd54NeBPx9E7GMH0u8oXXwzzv3cW6N1OH4fB2xI5xX3QJJM8DTJEnUoT5p0Jn29kR8GiDr82sxjA&__tn__=-UK-R&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+    </section>
+</body>
+</html>
