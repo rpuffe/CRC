@@ -86,6 +86,17 @@ nav .logo img {
 .logo img:hover {
   box-shadow: none;
 }
+.logomobile img {
+    display: none;
+    width: 110px; /* Adjust size as needed */
+    height: auto;
+    border-radius: 50%;
+    position: absolute;
+    animation: fadeInDown 1.4s ease-in-out;
+    top: -5.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
 .hero {
     background-image: url('./images/sp.jpeg');
