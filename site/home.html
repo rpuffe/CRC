@@ -14,44 +14,44 @@
     <!-- Font Awesome (optional for icons) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Fetch and inject navigation
-        fetch('nav.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('nav-placeholder').innerHTML = data;
-    
-                // Add functionality to the hamburger menu
-                const hamburger = document.querySelector('.hamburger');
-                const navLinks = document.querySelector('nav');
-                hamburger.addEventListener("click", () => {
-                    navLinks.classList.toggle('active');
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Fetch and inject navigation
+            fetch('nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('nav-placeholder').innerHTML = data;
+        
+                    // Add functionality to the hamburger menu
+                    const hamburger = document.querySelector('.hamburger');
+                    const navLinks = document.querySelector('nav');
+                    hamburger.addEventListener("click", () => {
+                        navLinks.classList.toggle('active');
+                    });
+                        
+                })
+                .catch(error => {
+                    console.error("Error loading nav.html:", error);
                 });
-                    
-            })
-            .catch(error => {
-                console.error("Error loading nav.html:", error);
-            });
-    
-        // Fetch and inject contact content
-        fetch('contact-content.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('contact').innerHTML = data;
-            })
-            .catch(error => {
-                console.error("Error loading contact-content.html:", error);
-            });
-    
-        // Fetch and append footer
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.body.innerHTML += data;
-            });
-    });
-</script> 
+        
+            // Fetch and inject contact content
+            fetch('contact-content.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('contact').innerHTML = data;
+                })
+                .catch(error => {
+                    console.error("Error loading contact-content.html:", error);
+                });
+        
+            // Fetch and append footer
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.body.innerHTML += data;
+                });
+        });
+    </script> 
 </head>
 <body>
     <div id="nav-placeholder"></div>
@@ -73,8 +73,7 @@
         <h2>Our Story</h2>
         <p>The Stick Ponies owe their roots to open mic events in Jamestown. After playing together long enough and having too much fun, they began booking gigs and playing shows together. </p>  
         <p> The Stick Ponies have a distinct sound that separates them from other groups. Covering a variety of songs with a splash of originals, this group is ready to entertain! </p>    
-        <p>If you love having a good time, you’ll love the Stick Ponies.
-            </p>
+        <p>If you love having a good time, you’ll love the Stick Ponies.</p>
     </section>
     <section id="events">
         <h2>Events</h2>
