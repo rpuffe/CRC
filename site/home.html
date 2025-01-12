@@ -9,47 +9,49 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="sp-styles.css">
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Load the navigation bar
-            fetch('nav.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('nav-placeholder').innerHTML = data;
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ENjdO4Dr2bkBIFxQpeoYiw3L6JbJoC6wrBqyrH33yyAJNtP7H91PzC+P30sm7j7L" crossorigin="anonymous">
+    <!-- Font Awesome (optional for icons) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-                    // Add functionality to the hamburger menu after nav is loaded
-                    const hamburger = document.querySelector('.hamburger');
-                    const navLinks = document.querySelectorAll('nav a');
-
-                    if (hamburger) {
-                        hamburger.addEventListener('click', () => {
-                            navLinks.forEach(link => {
-                                link.classList.toggle('show');
-                            });
-                        });
-                    } else {
-                        console.error("Hamburger button not found in nav.html");
-                    }
-                })
-                .catch(error => {
-                    console.error("Error loading nav.html:", error);
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Fetch and inject navigation
+        fetch('nav.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-placeholder').innerHTML = data;
+    
+                // Add functionality to the hamburger menu
+                const hamburger = document.querySelector('.hamburger');
+                const navLinks = document.querySelector('nav');
+                hamburger.addEventListener("click", () => {
+                    navLinks.classList.toggle('active');
                 });
-            fetch('contact-content.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('contact').innerHTML = data;
-                })
-                .catch(error => {
-                    console.error("Error loading contact-content.html:", error);
-                });
-            fetch('footer.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.body.innerHTML += data;
-                });
-        });
-
-    </script>
+                    
+            })
+            .catch(error => {
+                console.error("Error loading nav.html:", error);
+            });
+    
+        // Fetch and inject contact content
+        fetch('contact-content.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('contact').innerHTML = data;
+            })
+            .catch(error => {
+                console.error("Error loading contact-content.html:", error);
+            });
+    
+        // Fetch and append footer
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.body.innerHTML += data;
+            });
+    });
+</script> 
 </head>
 <body>
     <div id="nav-placeholder"></div>
@@ -77,5 +79,9 @@
         <a href="https://www.facebook.com/StickPoniesJamestown" target="_blank" style="font-size: 2em;"><i class="fab fa-facebook"></i></a>
     </section>
     <section id="contact"></section>
+    
+    
+    <!-- Bootstrap JS (for the toggler) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+YlhPnY4FI8Ng0fH0ugJp1L8BYiYV" crossorigin="anonymous"></script>
 </body>
 </html>

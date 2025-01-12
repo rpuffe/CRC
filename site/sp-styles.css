@@ -35,17 +35,18 @@ nav {
     overflow: hidden;
     height: 100px;
     position: relative;
+    text-align: center;
   }
 nav a {
-  color: #fff;
-  text-decoration: none;
-  padding: 1rem;
-  font-size: 1.1rem;
-  position: relative; /* Ensure relative positioning for pseudo-element */
-  transition: color 0.3s ease;
-  display: flex; /* Ensures proper alignment in a flexible layout */
-  align-items: center; /* Centers text vertically */
-  height: 100%; /* Ensures it fills the nav height */
+    color: #fff;
+    text-decoration: none;
+    padding: 1rem;
+    font-size: 1.1rem;
+    position: relative;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 nav a::before {
@@ -184,76 +185,45 @@ footer a:hover {
 }
 
 
-
-
+.hamburger {
+    display: none; /* Hide by default */
+    cursor: pointer;
+    font-size: 2rem; /* Increase size for better visibility */
+    background: none; /* Remove default button background */
+    border: none; /* Remove default button border */
+    color: #fff; /* Set icon color */
+    padding: 0.5rem 1rem; /* Add padding for better click area */
+}
 
 /* Default desktop styles (already included above) */
-
 /* Mobile styles */
 @media (max-width: 768px) {
-  nav {
-      flex-direction: column; /* Stack items vertically */
-      align-items: flex-start; /* Align items to the left */
-      padding: 0.5rem 1rem; /* Reduce padding */
-  }
 
-  nav a {
-      font-size: 1rem; /* Smaller font size for links */
-      padding: 0.5rem 0; /* Adjust padding for tighter layout */
-      width: 100%; /* Full-width links */
-      text-align: left; /* Align text to the left */
-  }
+    nav a {
+        font-size: 1rem; /* Smaller font size for links */
+    } 
+    nav img {
+        position:sticky;
+    }
+    .logo {
+        /* display: none; */
+        position: relative; /* Logo can stack naturally */
+        padding: 0.5rem 2rem; /* Add padding */
+        margin-bottom: 1rem; /* Add spacing below the logo */
+        margin-top: 1rem;
+        border-radius: 50%;
+        align-items: center;
 
-  .logo {
-      position: relative; /* Logo can stack naturally */
-      left: 0;
-      transform: none;
-      margin-bottom: 1rem; /* Add spacing below the logo */
-  }
+    }
 
-  .logo img {
-      width: 60px; /* Scale down the logo for mobile */
-  }
-}
-
-
-/* Hide hamburger button and use full menu by default */
-.hamburger {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  color: #fff;
-}
-
-.nav-links {
-  display: flex;
-  gap: 1rem; /* Add spacing between links */
-}
-
-@media (max-width: 768px) {
-  nav a {
-      display: none; /* Hide links by default */
-      width: 100%; /* Full-width links when shown */
-      padding: 0.5rem 0;
-      text-align: left;
-  }
-
-  nav a.show {
-      display: block; /* Show links when the class is added */
-  }
-
-  .hamburger {
-      display: block; /* Show the hamburger button */
-  }
-
-  nav {
-      flex-direction: column; /* Stack items vertically */
-      align-items: flex-start; /* Align items to the left */
-  }
-
-  .logo {
-      margin-bottom: 1rem; /* Add spacing below the logo */
-  }
+    .navbar {
+    background-color: #444; /* Example dark gray */
+    }
+    .navbar-brand img {
+        border-radius: 50%;
+        width: 50px;
+    }
+    .navbar-nav .nav-link:hover {
+        color: #007bff; /* Example: blue on hover */
+    }
 }
