@@ -117,6 +117,30 @@ nav .logo img {
     animation: fadeInDownh2 1s ease-in-out;
     animation-fill-mode: forwards;
 }
+.hero2 {
+    background-image: url('./images/banner.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    position: relative;
+}
+.hero3 {
+    background-image: url('./images/post-gig.jpeg');
+    background-size: cover;
+    background-position: center;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    position: relative;
+}
 
 @keyframes fadeInDownh2 {
     from {
@@ -182,17 +206,6 @@ footer a {
 }
 footer a:hover {
     color: #007BFF;
-}
-
-
-.hamburger {
-    display: none; /* Hide by default */
-    cursor: pointer;
-    font-size: 2rem; /* Increase size for better visibility */
-    background: none; /* Remove default button background */
-    border: none; /* Remove default button border */
-    color: #fff; /* Set icon color */
-    padding: 0.5rem 1rem; /* Add padding for better click area */
 }
 
 /* Default desktop styles (already included above) */
