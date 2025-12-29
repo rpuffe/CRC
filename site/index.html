@@ -1,97 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robert Puffe - Resume</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Robert Puffe | DevOps Engineer</title>
+    <meta name="description" content="DevOps Engineer specializing in AWS, Terraform, CI/CD pipelines, and infrastructure automation.">
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <header>
+    <!-- Hero Section -->
+    <section class="hero">
         <h1>Robert Puffe</h1>
-        <p>DevOps Engineer | AWS | Technology Passionate</p>
-    </header>
-
-    <section class="divider">
-        <h2>Contact Information</h2>
-        <p>Email: <a href="mailto:robertpuffe@gmail.com">robertpuffe@gmail.com</a></p>
-        <p>LinkedIn: <a href="https://linkedin.com/in/robert-puffe-aa092a6a/">linkedin.com/in/robert-puffe-aa092a6a/</a></p>
-        <p>GitHub: <a href="https://github.com/rpuffe">github.com/rpuffe</a></p>
-        <p>Website: <a href="https://www.robertpuffe.com">robertpuffe.com</a></p>
-    </section>
-
-    <section class="divider">
-        <h2>Work Experience</h2>
-        <section class="work-experience">
-            <h3>DevOps Engineer - Eldermark Software (March 2024 - Present)</h3>
-           <p>Responsible for the end-to-end administration of both AWS and on-premise infrastructure supporting multiple internal and customer-facing products. Tasks included deploying new services and maintaining existing services across diverse tech stacks.</p>
-           <ul>
-               <li>Manage DevOps responsibilities, overseeing environment and pipeline management.</li>
-               <li>Led successful transition of DevOps team to in-house, resulting in improved efficiency and cost savings.</li>
-               <li>Successfully migrated workloads to AWS using EC2, S3, Transfer Family, and Terraform.</li>
-               <li>Collaborate closely with development and QA teams to establish and maintain environments, ensuring seamless integration.</li>
-           </ul>   
-           <!-- <ul>
-               <li>Manage DevOps responsibilities, overseeing the creation and management of environments and pipelines to ensure efficient software development and deployment processes.</li>
-               <li>Led the transition of the DevOps team from an external vendor to an in-house team, resulting in increased operational efficiency, significant cost savings, and alignment with organizational goals.</li>
-               <li>Successfully migrated various workloads from on-premises datacenters to AWS, utilizing Terraform Infrastructure as Code (IaC) for streamlined provisioning. Employed AWS services such as EC2 for compute, S3 for scalable storage, and AWS Transfer Family for secure file transfers.</li>
-               <li>Collaborate closely with development and QA teams to establish and maintain environments, facilitating seamless integration and delivery of software products while bridging communication gaps.</li>
-               <li>Led the project to consolidate multiple environments from Office 365 and Google Workspace into a single shared Office 365 tenant,optimizing efficiency and collaboration within the organization.</li>
-           </ul>    -->
-       </section>
-        <section class="work-experience">
-             <h3>System Administrator - Eldermark Software (May 2021 - March 2024)</h3>
-            <p>Responsible for the end-to-end administration of both AWS and on-premise infrastructure supporting multiple internal and customer-facing products. Tasks included deploying new services and maintaining existing services across diverse tech stacks.</p>
-            <ul>
-                <li>Led successful transition of DevOps team to in-house, resulting in improved efficiency and cost savings.</li>
-                <li>Successfully migrated workloads to AWS using EC2, S3, Transfer Family, and Terraform.</li>
-                <li>Collaborate closely with development and QA teams to establish and maintain environments, ensuring seamless integration.</li>
-                <li>Led project to consolidate multiple Office 365 and Google Workspace environments into a single shared Office 365 tenant.</li>
-            </ul>   
-            <!-- <ul>
-                <li>Manage DevOps responsibilities, overseeing the creation and management of environments and pipelines to ensure efficient software development and deployment processes.</li>
-                <li>Led the transition of the DevOps team from an external vendor to an in-house team, resulting in increased operational efficiency, significant cost savings, and alignment with organizational goals.</li>
-                <li>Successfully migrated various workloads from on-premises datacenters to AWS, utilizing Terraform Infrastructure as Code (IaC) for streamlined provisioning. Employed AWS services such as EC2 for compute, S3 for scalable storage, and AWS Transfer Family for secure file transfers.</li>
-                <li>Collaborate closely with development and QA teams to establish and maintain environments, facilitating seamless integration and delivery of software products while bridging communication gaps.</li>
-                <li>Led the project to consolidate multiple environments from Office 365 and Google Workspace into a single shared Office 365 tenant,optimizing efficiency and collaboration within the organization.</li>
-            </ul>    -->
-        </section>
-        <section class="work-experience">
-            <h3>IT Specialist - Eldermark Software (September 2016 - May 2021)</h3>
-            <ul>
-                <li>Led the successful project to seamlessly transition our teams to remote work during the pandemic, ensuring uninterrupted productivity by overseeing the installation and support of VPNs and network devices.</li>
-                <li>Manage Office 365 including user provisioning, licensing, and security.</li>
-                <li>Planned and executed the rollout of Microsoft Teams.</li>
-                <li>Maintained Dynamics 365 instance including customizations and reporting.</li>
-                <li>Manage Windows Server and network infrastructure in datacenters, offices, and cloud environments.</li>
-                <li>Maintain customer databases including creating, managing backups, and routine management tasks.</li>
-                <li>Conducted operations to split community data during mergers or acquisitions, enabling customers to retain access to their data.</li>
-                <li>Collaborated with customer leadership and end users to provide guidance on network and device requirements.</li>
-            </ul>
-        </section>
-    </section>
-
-    <section class="skills">
-        <h2>Skills</h2>
-        <p>AWS, Terraform, AWS Copilot, Windows Server, IT Operations, Jira, GitHub, Office 365</p>
-
-    </section>
-
-    <!-- <section class="projects">
-        <h2>Projects</h2>
-        <div class="project">
-            <h3>Project Name</h3>
-            <p>Description of the project and your role in it.</p>
+        <p class="tagline">DevOps Engineer | Building Reliable Infrastructure</p>
+        <p class="summary">
+            Lead DevOps strategy and platform operations with a focus on automation, security, 
+            and cross-team delivery alignment. Passionate about building scalable cloud infrastructure 
+            and empowering development teams through robust CI/CD pipelines.
+        </p>
+        <nav class="nav-links">
+            <a href="#experience">Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="scroll-indicator">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+            </svg>
         </div>
+    </section>
 
-         Add more projects as needed 
-    </section> -->
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <div class="section-header">
+                <h2>Experience</h2>
+            </div>
 
+            <!-- Eldermark -->
+            <article class="experience-item current">
+                <div class="experience-header">
+                    <h3>DevOps Engineer</h3>
+                    <div class="company">Eldermark</div>
+                    <div class="duration">Mar 2024 – Present · 1 yr 10 mos</div>
+                </div>
+                <p class="experience-description">
+                    Lead DevOps strategy and platform operations across Eldermark's AWS environments, 
+                    focusing on automation, security, and cross-team delivery alignment.
+                </p>
+                <ul>
+                    <li>Manage multi-account AWS environments covering infrastructure provisioning, networking, IAM, and lifecycle management</li>
+                    <li>Architect and maintain CI/CD pipelines using GitHub Actions, AWS CodePipeline, and Terraform to standardize delivery across products</li>
+                    <li>Implement infrastructure and container security practices that meet compliance and reliability requirements</li>
+                    <li>Collaborate with leadership on company-wide technical initiatives including Jira migrations, AI proof-of-concept tooling, security audits, and penetration-test remediation</li>
+                    <li>Drive adoption of AI-based tools to improve development efficiency and code quality</li>
+                    <li>Work with engineering and QA leadership to establish consistent release, rollback, and monitoring standards</li>
+                </ul>
+            </article>
+
+            <article class="experience-item">
+                <div class="experience-header">
+                    <h3>System Administrator</h3>
+                    <div class="company">Eldermark</div>
+                    <div class="duration">May 2021 – Mar 2024 · 2 yrs 11 mos</div>
+                </div>
+                <p class="experience-description">
+                    Responsible for the end-to-end administration of both AWS and on-premise infrastructure 
+                    supporting multiple internal and customer-facing products.
+                </p>
+                <ul>
+                    <li>Managed DevOps responsibilities, overseeing environment and pipeline management</li>
+                    <li>Led successful transition of DevOps team to in-house, resulting in improved efficiency and cost savings</li>
+                    <li>Successfully migrated workloads to AWS using EC2, S3, Transfer Family, and Terraform</li>
+                    <li>Collaborated closely with development and QA teams to establish and maintain environments</li>
+                    <li>Led project to consolidate multiple Office 365 and Google Workspace environments into a single shared Office 365 tenant</li>
+                </ul>
+            </article>
+
+            <article class="experience-item">
+                <div class="experience-header">
+                    <h3>IT Specialist</h3>
+                    <div class="company">Eldermark</div>
+                    <div class="duration">Sep 2016 – May 2021 · 4 yrs 9 mos</div>
+                </div>
+                <ul>
+                    <li>Led the successful project to transition teams to remote work during the pandemic, ensuring uninterrupted productivity</li>
+                    <li>Managed Office 365 including user provisioning, licensing, and security</li>
+                    <li>Planned and executed the rollout of Microsoft Teams</li>
+                    <li>Maintained Dynamics 365 instance including customizations and reporting</li>
+                    <li>Managed Windows Server and network infrastructure in datacenters, offices, and cloud environments</li>
+                    <li>Maintained customer databases including creating, managing backups, and routine management tasks</li>
+                </ul>
+            </article>
+
+            <article class="experience-item">
+                <div class="experience-header">
+                    <h3>Document Management Specialist</h3>
+                    <div class="company">Central Business Systems</div>
+                    <div class="duration">Jul 2015 – Aug 2016 · 1 yr 2 mos</div>
+                </div>
+                <p class="experience-description">
+                    Provided document management solutions to small business leaders based on technical knowledge, 
+                    problem solving, and creative thinking to help organizations meet their goals.
+                </p>
+            </article>
+
+            <article class="experience-item">
+                <div class="experience-header">
+                    <h3>Computer Repair Technician</h3>
+                    <div class="company">Central Business Systems</div>
+                    <div class="duration">Apr 2014 – Feb 2016 · 1 yr 11 mos</div>
+                </div>
+                <ul>
+                    <li>Diagnosed hardware and software issues for individuals and small businesses</li>
+                    <li>Helped customers with new software/hardware setup and maintenance of computers and small network solutions</li>
+                </ul>
+            </article>
+
+            <article class="experience-item">
+                <div class="experience-header">
+                    <h3>Store Manager</h3>
+                    <div class="company">RadioShack</div>
+                    <div class="duration">Apr 2012 – Apr 2014 · 2 yrs 1 mo</div>
+                </div>
+                <p class="experience-description">
+                    Gained skills in team leadership, operational management, and customer-centric strategies.
+                </p>
+                <ul>
+                    <li>Developed and led a team, including training, developing performance plans, and scheduling</li>
+                    <li>Achieved profitability at a location that had not been profitable in previous years</li>
+                    <li>Received the Chamber of Commerce Customer Service Award</li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2>Skills</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Cloud & Infrastructure</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">EC2</span>
+                        <span class="skill-tag">S3</span>
+                        <span class="skill-tag">Lambda</span>
+                        <span class="skill-tag">CloudFront</span>
+                        <span class="skill-tag">Route 53</span>
+                        <span class="skill-tag">IAM</span>
+                        <span class="skill-tag">Transfer Family</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Infrastructure as Code</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">CloudFormation</span>
+                        <span class="skill-tag">AWS Copilot</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>CI/CD & Version Control</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">GitHub Actions</span>
+                        <span class="skill-tag">AWS CodePipeline</span>
+                        <span class="skill-tag">CodeBuild</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">GitHub</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Containers & Orchestration</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">ECS</span>
+                        <span class="skill-tag">Container Security</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Systems & Networking</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Windows Server</span>
+                        <span class="skill-tag">Linux</span>
+                        <span class="skill-tag">VPN</span>
+                        <span class="skill-tag">Networking</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & Platforms</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Jira</span>
+                        <span class="skill-tag">Office 365</span>
+                        <span class="skill-tag">Microsoft Teams</span>
+                        <span class="skill-tag">Dynamics 365</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Contact</h2>
+            </div>
+            <div class="contact-links">
+                <a href="mailto:robertpuffe@gmail.com" class="contact-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    robertpuffe@gmail.com
+                </a>
+                <a href="https://linkedin.com/in/robert-puffe-aa092a6a/" target="_blank" rel="noopener noreferrer" class="contact-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                    </svg>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/rpuffe" target="_blank" rel="noopener noreferrer" class="contact-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+                    </svg>
+                    GitHub
+                </a>
+                <a href="https://www.robertpuffe.com" target="_blank" rel="noopener noreferrer" class="contact-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                    </svg>
+                    robertpuffe.com
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>© 2024 Robert Puffe. All rights reserved.</p>
+        <div class="visitor-counter">
+            visitors: <span id="visitor-count">loading...</span>
+        </div>
+        <p>© 2025 Robert Puffe. All rights reserved.</p>
     </footer>
-</body>
 
+    <!-- Visitor Counter Script - connects to AWS API Gateway -->
+    <script>
+        /**
+         * Visitor Counter Integration
+         * 
+         * After deploying the CloudFormation stack, get the API endpoint from the stack outputs:
+         *   aws cloudformation describe-stacks --stack-name YOUR_STACK_NAME \
+         *     --query "Stacks[0].Outputs[?OutputKey=='VisitorCounterApiEndpoint'].OutputValue" \
+         *     --output text
+         * 
+         * Then replace YOUR_API_GATEWAY_ENDPOINT below with the actual URL.
+         */
+        async function updateVisitorCount() {
+            const counterElement = document.getElementById('visitor-count');
+            try {
+                // TODO: Replace with your API Gateway endpoint after CloudFormation deployment
+                // Example: 'https://abc123xyz.execute-api.us-east-1.amazonaws.com/counter'
+                const API_ENDPOINT = 'YOUR_API_GATEWAY_ENDPOINT';
+                
+                if (API_ENDPOINT === 'YOUR_API_GATEWAY_ENDPOINT') {
+                    // Placeholder until API is deployed
+                    counterElement.textContent = '---';
+                    return;
+                }
+                
+                const response = await fetch(API_ENDPOINT);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                counterElement.textContent = data.count.toLocaleString();
+            } catch (error) {
+                console.error('Failed to fetch visitor count:', error);
+                counterElement.textContent = '---';
+            }
+        }
+        
+        // Update count on page load
+        document.addEventListener('DOMContentLoaded', updateVisitorCount);
+    </script>
+</body>
 </html>

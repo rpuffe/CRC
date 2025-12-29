@@ -236,6 +236,171 @@ Resources:
       - Key: Environment
         Value: !Ref env
 
+  ### VISITOR COUNTER RESOURCES ###
+  
+  # DynamoDB table for visitor count
+  VisitorCountTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "crc-visitor-count-${env}"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      Tags:
+        - Key: Name
+          Value: crc-visitor-count
+        - Key: Environment
+          Value: !Ref env
+
+  # Lambda execution role
+  VisitorCounterLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "crc-visitor-counter-role-${env}"
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: !Sub "crc-visitor-counter-policy-${env}"
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:*"
+              - Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:UpdateItem
+                Resource: !GetAtt VisitorCountTable.Arn
+
+  # Lambda function for visitor counter
+  VisitorCounterFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "crc-visitor-counter-${env}"
+      Runtime: python3.12
+      Handler: index.handler
+      Role: !GetAtt VisitorCounterLambdaRole.Arn
+      Timeout: 10
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref VisitorCountTable
+      Code:
+        ZipFile: |
+          import json
+          import os
+          import boto3
+          from decimal import Decimal
+
+          dynamodb = boto3.resource('dynamodb')
+          table = dynamodb.Table(os.environ['TABLE_NAME'])
+
+          def handler(event, context):
+              try:
+                  # Increment the visitor count atomically
+                  response = table.update_item(
+                      Key={'id': 'visitors'},
+                      UpdateExpression='SET visit_count = if_not_exists(visit_count, :start) + :inc',
+                      ExpressionAttributeValues={
+                          ':inc': 1,
+                          ':start': 0
+                      },
+                      ReturnValues='UPDATED_NEW'
+                  )
+                  
+                  count = int(response['Attributes']['visit_count'])
+                  
+                  return {
+                      'statusCode': 200,
+                      'headers': {
+                          'Content-Type': 'application/json',
+                          'Access-Control-Allow-Origin': '*',
+                          'Access-Control-Allow-Headers': 'Content-Type',
+                          'Access-Control-Allow-Methods': 'GET, OPTIONS'
+                      },
+                      'body': json.dumps({'count': count})
+                  }
+              except Exception as e:
+                  print(f"Error: {str(e)}")
+                  return {
+                      'statusCode': 500,
+                      'headers': {
+                          'Content-Type': 'application/json',
+                          'Access-Control-Allow-Origin': '*'
+                      },
+                      'body': json.dumps({'error': 'Failed to update visitor count'})
+                  }
+      Tags:
+        - Key: Name
+          Value: crc-visitor-counter
+        - Key: Environment
+          Value: !Ref env
+
+  # HTTP API Gateway
+  VisitorCounterApi:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: !Sub "crc-visitor-counter-api-${env}"
+      ProtocolType: HTTP
+      CorsConfiguration:
+        AllowOrigins:
+          - !Sub "https://${DomainName}"
+          - "http://localhost:*"
+        AllowMethods:
+          - GET
+          - OPTIONS
+        AllowHeaders:
+          - Content-Type
+      Tags:
+        Name: crc-visitor-counter-api
+        Environment: !Ref env
+
+  # API Gateway integration with Lambda
+  VisitorCounterApiIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref VisitorCounterApi
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt VisitorCounterFunction.Arn
+      PayloadFormatVersion: '2.0'
+
+  # API Gateway route
+  VisitorCounterApiRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref VisitorCounterApi
+      RouteKey: 'GET /counter'
+      Target: !Sub "integrations/${VisitorCounterApiIntegration}"
+
+  # API Gateway stage
+  VisitorCounterApiStage:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: !Ref VisitorCounterApi
+      StageName: '$default'
+      AutoDeploy: true
+
+  # Lambda permission for API Gateway
+  VisitorCounterLambdaPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref VisitorCounterFunction
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${VisitorCounterApi}/*"
+
 Outputs:
   BucketName:
     Description: Name of the bucket
@@ -247,3 +412,8 @@ Outputs:
     Value: !GetAtt MyBucket.Arn
     Export:
       Name: !Sub "crc-bucket-arn-${env}"
+  VisitorCounterApiEndpoint:
+    Description: API Gateway endpoint URL for visitor counter
+    Value: !Sub "https://${VisitorCounterApi}.execute-api.${AWS::Region}.amazonaws.com/counter"
+    Export:
+      Name: !Sub "crc-visitor-counter-api-${env}"
