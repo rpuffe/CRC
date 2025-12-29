@@ -1,6 +1,7 @@
 /* Terminal-inspired DevOps Resume Styles */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
+/* Dark theme (default) */
 :root {
     --bg-primary: #0d1117;
     --bg-secondary: #161b22;
@@ -17,6 +18,27 @@
     --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     --font-mono: 'JetBrains Mono', monospace;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --gradient-bg-1: rgba(88, 166, 255, 0.03);
+    --gradient-bg-2: rgba(126, 231, 135, 0.03);
+}
+
+/* Light theme */
+[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --bg-tertiary: #eaeef2;
+    --border-color: #d0d7de;
+    --text-primary: #1f2328;
+    --text-secondary: #656d76;
+    --text-muted: #8c959f;
+    --accent-blue: #0969da;
+    --accent-green: #1a7f37;
+    --accent-purple: #8250df;
+    --accent-orange: #bc4c00;
+    --accent-cyan: #0550ae;
+    --shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
+    --gradient-bg-1: rgba(9, 105, 218, 0.04);
+    --gradient-bg-2: rgba(26, 127, 55, 0.04);
 }
 
 *, *::before, *::after {
@@ -46,10 +68,63 @@ body::before {
     width: 100%;
     height: 100%;
     background-image: 
-        radial-gradient(circle at 25% 25%, rgba(88, 166, 255, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 75% 75%, rgba(126, 231, 135, 0.03) 0%, transparent 50%);
+        radial-gradient(circle at 25% 25%, var(--gradient-bg-1) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, var(--gradient-bg-2) 0%, transparent 50%);
     pointer-events: none;
     z-index: -1;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 1000;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+}
+
+.theme-toggle:hover {
+    border-color: var(--accent-blue);
+    transform: scale(1.05);
+}
+
+.theme-toggle svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--text-primary);
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover svg {
+    transform: rotate(15deg);
+}
+
+/* Sun icon (shown in dark mode) */
+.theme-toggle .icon-sun {
+    display: block;
+}
+
+.theme-toggle .icon-moon {
+    display: none;
+}
+
+/* Moon icon (shown in light mode) */
+[data-theme="light"] .theme-toggle .icon-sun {
+    display: none;
+}
+
+[data-theme="light"] .theme-toggle .icon-moon {
+    display: block;
 }
 
 .container {
