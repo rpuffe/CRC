@@ -250,6 +250,12 @@ section {
     font-family: var(--font-mono);
 }
 
+/* Inline company name in lists */
+.experience-item li .company {
+    font-family: var(--font-mono);
+    color: var(--accent-orange);
+}
+
 /* Skills Section */
 .skills-grid {
     display: grid;
