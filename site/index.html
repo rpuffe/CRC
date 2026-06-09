@@ -12,323 +12,432 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robert Puffe | DevOps Engineer</title>
-    <meta name="description" content="DevOps Engineer specializing in AWS, Terraform, CI/CD pipelines, and infrastructure automation.">
-    <link rel="stylesheet" href="styles.css">
+    <title>Robert Puffe | DevOps Lead</title>
+    <meta name="description" content="DevOps lead with 9+ years in tech: AWS, Terraform, and CI/CD pipelines. This site is itself a portfolio piece: S3, CloudFront, Lambda, DynamoDB, deployed by CodePipeline.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="canonical" href="https://robertpuffe.com">
+    <!-- Open Graph: how the site looks when shared on LinkedIn/Slack/etc. -->
+    <meta property="og:title" content="Robert Puffe | DevOps Lead">
+    <meta property="og:description" content="AWS, Terraform, CI/CD. The site you're clicking runs on the same stack it describes.">
+    <meta property="og:url" content="https://robertpuffe.com">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">
-        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 000-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
-        </svg>
-        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 3a9 9 0 109 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 01-4.4 2.26 5.403 5.403 0 01-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>
-        </svg>
-    </button>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Robert Puffe</h1>
-        <p class="tagline">DevOps Engineer | Building Reliable Infrastructure</p>
-        <p class="summary">
-            Lead DevOps strategy and platform operations with a focus on automation, security, 
-            and cross-team delivery alignment. Passionate about building scalable cloud infrastructure 
-            and empowering development teams through robust CI/CD pipelines.
-        </p>
-        <nav class="nav-links">
-            <a href="#experience">Experience</a>
-            <a href="#skills">Skills</a>
-            <a href="#contact">Contact</a>
+    <!-- Sticky header -->
+    <header class="site-header">
+        <a href="#top" class="logo">rpuffe<span class="logo-at">@</span>aws<span class="logo-prompt">:~$</span></a>
+        <nav class="header-nav">
+            <a href="#experience">experience</a>
+            <a href="#skills">skills</a>
+            <a href="#architecture">how it's built</a>
+            <a href="#contact">contact</a>
         </nav>
-        <div class="scroll-indicator">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+        <button class="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">
+            <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 000-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
             </svg>
-        </div>
-    </section>
+            <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 3a9 9 0 109 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 01-4.4 2.26 5.403 5.403 0 01-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>
+            </svg>
+        </button>
+    </header>
 
-    <!-- Experience Section -->
-    <section id="experience">
-        <div class="container">
-            <div class="section-header">
-                <h2>Experience</h2>
-            </div>
-
-            <!-- Eldermark -->
-            <article class="experience-item current">
-                <div class="experience-header">
-                    <h3>DevOps Engineer</h3>
-                    <div class="company">Eldermark</div>
-                    <div class="duration">Mar 2024 – Present</div>
+    <main id="top">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container hero-grid">
+                <div class="hero-text">
+                    <p class="hero-kicker">$ whoami</p>
+                    <h1>Robert Puffe</h1>
+                    <p class="tagline">DevOps Lead · AWS · Terraform · CI/CD</p>
+                    <p class="hero-location">Remote (US) · based in Jamestown, ND</p>
+                    <p class="summary">
+                        I've spent nine years at the same company, growing from IT support into
+                        DevOps, long enough to learn that whatever I build, I will be the one
+                        maintaining it. I work on the pipelines, environments, and automation that
+                        help our dev teams ship, and I try to automate anything I catch myself
+                        doing twice.
+                    </p>
+                    <div class="hero-stats">
+                        <span class="stat">9+ yrs in tech</span>
+                        <span class="stat">5 yrs hands-on AWS</span>
+                        <span class="stat">3 promotions</span>
+                    </div>
+                    <div class="hero-actions">
+                        <a href="mailto:robertpuffe@gmail.com" class="btn btn-primary">Get in touch</a>
+                        <a href="#architecture" class="btn btn-ghost">See how this site is built ↓</a>
+                    </div>
                 </div>
-                <p class="experience-description">
-                    Lead DevOps strategy and platform operations across Eldermark's AWS environments, 
-                    focusing on automation, security, and cross-team delivery alignment.
+                <div class="hero-photo">
+                    <!-- Drop a square photo named headshot.jpg into site/ and it will appear here -->
+                    <div class="terminal-window">
+                        <div class="terminal-bar">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                            <span class="terminal-title">headshot.jpg</span>
+                        </div>
+                        <img src="headshot.jpg" alt="Robert Puffe" class="headshot"
+                             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <div class="photo-fallback" style="display:none" aria-hidden="true">RP</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience">
+            <div class="container">
+                <h2 class="section-title"><span class="hash">##</span> experience</h2>
+
+                <article class="experience-item current">
+                    <div class="experience-header">
+                        <h3>DevOps Lead</h3>
+                        <div class="meta-row">
+                            <span class="company">Eldermark</span>
+                            <span class="duration">Mar 2024 – Present · promoted from DevOps Engineer, Apr 2026</span>
+                        </div>
+                    </div>
+                    <p class="experience-description">
+                        Platform and infrastructure steward for Eldermark's AWS environments, leading
+                        DevOps work that usually splits across release engineering, infrastructure
+                        architecture, and platform engineering. A lot of the job is connecting dots:
+                        catching risky infrastructure and deployment changes before they become
+                        operational issues, and keeping releases moving across teams while making the
+                        platform more self-service, more secure, and less reactive.
+                    </p>
+                    <ul>
+                        <li>Own AWS infrastructure for two SaaS products (8 accounts spanning 10 environments) and help support two additional product platforms</li>
+                        <li>Redesigned the CI/CD pipeline architecture and rebuilt hand-created pipelines as reusable Terraform modules, cutting roughly 20 minutes of downtime from every production deployment</li>
+                        <li>Build and maintain 20+ pipelines with GitHub Actions, AWS CodePipeline, and Terraform, including staging promotion flows and automated builds for shared ECR base images</li>
+                        <li>Replaced a manual, multi-system environment refresh process with a push-button CodePipeline, saving hours of work per refresh and removing human error from production database restores</li>
+                        <li>Built a deployment tracking system on Lambda and CodePipeline events that notifies Teams and updates Jira automatically, so nobody has to chase release status</li>
+                        <li>Drove the company's initial adoption of AI development tools, from early proofs of concept to everyday use that improves development efficiency and code quality</li>
+                        <li>Respond to production infrastructure issues and review changes early in the SDLC to catch architecture and deployment risks before they reach an environment</li>
+                        <li>Implement infrastructure and container security practices that meet compliance and reliability requirements</li>
+                        <li>Collaborate with leadership on company-wide initiatives including Jira migrations, security audits, and penetration-test remediation</li>
+                    </ul>
+                </article>
+
+                <article class="experience-item">
+                    <div class="experience-header">
+                        <h3>System Administrator</h3>
+                        <div class="meta-row">
+                            <span class="company">Eldermark</span>
+                            <span class="duration">May 2021 – Mar 2024</span>
+                        </div>
+                    </div>
+                    <p class="experience-description">
+                        End-to-end administration of AWS and on-premise infrastructure supporting
+                        multiple internal and customer-facing products.
+                    </p>
+                    <ul>
+                        <li>Managed DevOps responsibilities, overseeing environment and pipeline management</li>
+                        <li>Led successful transition of DevOps team to in-house, resulting in improved efficiency and cost savings</li>
+                        <li>Migrated workloads to AWS using EC2, S3, Transfer Family, and Terraform</li>
+                        <li>Collaborated closely with development and QA teams to establish and maintain environments</li>
+                        <li>Consolidated multiple Office 365 and Google Workspace environments into a single shared Office 365 tenant</li>
+                    </ul>
+                </article>
+
+                <article class="experience-item">
+                    <div class="experience-header">
+                        <h3>IT Specialist</h3>
+                        <div class="meta-row">
+                            <span class="company">Eldermark</span>
+                            <span class="duration">Sep 2016 – May 2021</span>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>Led the project to transition teams to remote work during the pandemic, ensuring uninterrupted productivity</li>
+                        <li>Managed Office 365 including user provisioning, licensing, and security</li>
+                        <li>Planned and executed the rollout of Microsoft Teams</li>
+                        <li>Maintained Dynamics 365 instance including customizations and reporting</li>
+                        <li>Managed Windows Server and network infrastructure in datacenters, offices, and cloud environments</li>
+                        <li>Maintained customer databases including backups and routine management tasks</li>
+                    </ul>
+                </article>
+
+                <article class="experience-item">
+                    <div class="experience-header">
+                        <h3>Earlier Experience</h3>
+                        <div class="meta-row">
+                            <span class="duration">2012 – 2016</span>
+                        </div>
+                    </div>
+                    <ul>
+                        <li><span class="company">Central Business Systems</span> · Document Management Specialist, Computer Repair Technician</li>
+                        <li><span class="company">RadioShack</span> · Store Manager</li>
+                        <li>Built foundation in technical troubleshooting, small business IT consulting, and team leadership</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills">
+            <div class="container">
+                <h2 class="section-title"><span class="hash">##</span> skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>AWS Compute &amp; Containers</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">ECS</span>
+                            <span class="skill-tag">EC2</span>
+                            <span class="skill-tag">Lambda</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">AWS Copilot</span>
+                            <span class="skill-tag">Fargate</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>AWS Data &amp; Storage</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">RDS Aurora</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">DynamoDB</span>
+                            <span class="skill-tag">S3</span>
+                            <span class="skill-tag">Transfer Family</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>AWS Networking &amp; Security</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">VPC</span>
+                            <span class="skill-tag">Route 53</span>
+                            <span class="skill-tag">CloudFront</span>
+                            <span class="skill-tag">API Gateway</span>
+                            <span class="skill-tag">Cognito</span>
+                            <span class="skill-tag">IAM</span>
+                            <span class="skill-tag">ACM</span>
+                            <span class="skill-tag">Secrets Manager</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Infrastructure as Code</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Terraform</span>
+                            <span class="skill-tag">Terraform Cloud</span>
+                            <span class="skill-tag">CloudFormation</span>
+                            <span class="skill-tag">AWS Copilot CLI</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>CI/CD Pipelines</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">GitHub Actions</span>
+                            <span class="skill-tag">AWS CodePipeline</span>
+                            <span class="skill-tag">AWS CodeBuild</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">GitHub</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Observability &amp; Monitoring</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">CloudWatch</span>
+                            <span class="skill-tag">CloudWatch Alarms</span>
+                            <span class="skill-tag">Elastic APM</span>
+                            <span class="skill-tag">SNS Notifications</span>
+                            <span class="skill-tag">Log Monitoring</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Scripting &amp; Automation</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Boto3</span>
+                            <span class="skill-tag">Bash</span>
+                            <span class="skill-tag">PowerShell</span>
+                            <span class="skill-tag">Liquibase</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Systems &amp; Platforms</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Linux</span>
+                            <span class="skill-tag">Windows Server</span>
+                            <span class="skill-tag">Jira</span>
+                            <span class="skill-tag">Office 365</span>
+                            <span class="skill-tag">LaunchDarkly</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How this site works -->
+        <section id="architecture">
+            <div class="container">
+                <h2 class="section-title"><span class="hash">##</span> how this site works</h2>
+                <p class="architecture-intro">
+                    This page is its own portfolio piece: my take on the
+                    <a href="https://cloudresumechallenge.dev" target="_blank" rel="noopener noreferrer">Cloud Resume Challenge</a>.
+                    It's static HTML on S3 served through CloudFront. The visitor counter below is a
+                    live call to API Gateway, handled by a Lambda function that increments a count in
+                    DynamoDB. All of the infrastructure is defined in CloudFormation, and every push
+                    to <code>main</code> kicks off CodePipeline to rebuild and redeploy, including
+                    the change you're reading right now. It's not a one-off, either: I run a couple
+                    of other sites on this same pattern.
                 </p>
-                <ul>
-                    <li>Manage multi-account AWS environments covering infrastructure provisioning, networking, IAM, and lifecycle management</li>
-                    <li>Architect and maintain CI/CD pipelines using GitHub Actions, AWS CodePipeline, and Terraform to standardize delivery across products</li>
-                    <li>Implement infrastructure and container security practices that meet compliance and reliability requirements</li>
-                    <li>Collaborate with leadership on company-wide technical initiatives including Jira migrations, AI proof-of-concept tooling, security audits, and penetration-test remediation</li>
-                    <li>Drive adoption of AI-based tools to improve development efficiency and code quality</li>
-                    <li>Work with engineering and QA leadership to establish consistent release, rollback, and monitoring standards</li>
-                </ul>
-            </article>
 
-            <article class="experience-item">
-                <div class="experience-header">
-                    <h3>System Administrator</h3>
-                    <div class="company">Eldermark</div>
-                    <div class="duration">May 2021 – Mar 2024 · 2 yrs 11 mos</div>
+                <div class="diagram-scroll">
+                    <svg class="diagram" viewBox="0 0 780 350" role="img"
+                         aria-label="Architecture diagram: browser requests the site from CloudFront backed by S3, and calls API Gateway, Lambda, and DynamoDB for the visitor counter. GitHub pushes trigger CodePipeline and CodeBuild, which deploy to S3. All AWS resources are defined in CloudFormation.">
+                        <defs>
+                            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                <path d="M0,0 L10,5 L0,10 z" class="diag-arrow"/>
+                            </marker>
+                        </defs>
+
+                        <!-- AWS boundary -->
+                        <rect x="230" y="8" width="520" height="216" rx="10" class="diag-boundary"/>
+                        <text x="246" y="210" class="diag-note">AWS · defined in CloudFormation</text>
+
+                        <!-- Browser -->
+                        <rect x="20" y="84" width="130" height="48" rx="8" class="diag-box"/>
+                        <text x="85" y="104" class="diag-label" text-anchor="middle">you</text>
+                        <text x="85" y="120" class="diag-sub" text-anchor="middle">browser</text>
+
+                        <!-- Row 1: site delivery -->
+                        <rect x="260" y="28" width="150" height="44" rx="8" class="diag-box"/>
+                        <text x="335" y="47" class="diag-label" text-anchor="middle">CloudFront</text>
+                        <text x="335" y="62" class="diag-sub" text-anchor="middle">CDN + TLS</text>
+
+                        <rect x="560" y="28" width="160" height="44" rx="8" class="diag-box"/>
+                        <text x="640" y="47" class="diag-label" text-anchor="middle">S3</text>
+                        <text x="640" y="62" class="diag-sub" text-anchor="middle">static site</text>
+
+                        <path d="M410,50 H552" class="diag-line"/>
+                        <text x="481" y="42" class="diag-sub" text-anchor="middle">origin</text>
+
+                        <!-- Row 2: counter API -->
+                        <rect x="260" y="128" width="140" height="44" rx="8" class="diag-box"/>
+                        <text x="330" y="147" class="diag-label" text-anchor="middle">API Gateway</text>
+                        <text x="330" y="162" class="diag-sub" text-anchor="middle">HTTP API</text>
+
+                        <rect x="450" y="128" width="110" height="44" rx="8" class="diag-box"/>
+                        <text x="505" y="147" class="diag-label" text-anchor="middle">Lambda</text>
+                        <text x="505" y="162" class="diag-sub" text-anchor="middle">counter fn</text>
+
+                        <rect x="610" y="128" width="120" height="44" rx="8" class="diag-box"/>
+                        <text x="670" y="147" class="diag-label" text-anchor="middle">DynamoDB</text>
+                        <text x="670" y="162" class="diag-sub" text-anchor="middle">visit count</text>
+
+                        <path d="M400,150 H442" class="diag-line"/>
+                        <path d="M560,150 H602" class="diag-line"/>
+
+                        <!-- Browser elbows -->
+                        <path d="M150,96 H205 V50 H252" class="diag-line"/>
+                        <text x="205" y="40" class="diag-sub" text-anchor="middle">site</text>
+                        <path d="M150,120 H205 V150 H252" class="diag-line"/>
+                        <text x="205" y="178" class="diag-sub" text-anchor="middle">GET /counter</text>
+
+                        <!-- Row 3: CI/CD -->
+                        <rect x="20" y="276" width="140" height="44" rx="8" class="diag-box"/>
+                        <text x="90" y="295" class="diag-label" text-anchor="middle">GitHub</text>
+                        <text x="90" y="310" class="diag-sub" text-anchor="middle">rpuffe/CRC</text>
+
+                        <rect x="260" y="276" width="200" height="44" rx="8" class="diag-box"/>
+                        <text x="360" y="295" class="diag-label" text-anchor="middle">CodePipeline</text>
+                        <text x="360" y="310" class="diag-sub" text-anchor="middle">CodeBuild → s3 sync</text>
+
+                        <path d="M160,298 H252" class="diag-line"/>
+                        <text x="206" y="290" class="diag-sub" text-anchor="middle">git push</text>
+
+                        <path d="M460,298 H762 V50 H730" class="diag-line"/>
+                        <text x="610" y="290" class="diag-sub" text-anchor="middle">deploy site + invalidate CDN</text>
+                    </svg>
                 </div>
-                <p class="experience-description">
-                    Responsible for the end-to-end administration of both AWS and on-premise infrastructure 
-                    supporting multiple internal and customer-facing products.
+
+                <div class="counter-card">
+                    <span class="counter-prompt">$ curl api/counter →</span>
+                    <span class="counter-value">you are visitor <strong id="visitor-count">…</strong></span>
+                    <span class="counter-note">counted by Lambda, stored in DynamoDB</span>
+                </div>
+
+                <p class="architecture-source">
+                    Want the details? <a href="https://github.com/rpuffe/CRC" target="_blank" rel="noopener noreferrer">View the source and CloudFormation template on GitHub →</a>
                 </p>
-                <ul>
-                    <li>Managed DevOps responsibilities, overseeing environment and pipeline management</li>
-                    <li>Led successful transition of DevOps team to in-house, resulting in improved efficiency and cost savings</li>
-                    <li>Successfully migrated workloads to AWS using EC2, S3, Transfer Family, and Terraform</li>
-                    <li>Collaborated closely with development and QA teams to establish and maintain environments</li>
-                    <li>Led project to consolidate multiple Office 365 and Google Workspace environments into a single shared Office 365 tenant</li>
-                </ul>
-            </article>
-
-            <article class="experience-item">
-                <div class="experience-header">
-                    <h3>IT Specialist</h3>
-                    <div class="company">Eldermark</div>
-                    <div class="duration">Sep 2016 – May 2021 · 4 yrs 9 mos</div>
-                </div>
-                <ul>
-                    <li>Led the successful project to transition teams to remote work during the pandemic, ensuring uninterrupted productivity</li>
-                    <li>Managed Office 365 including user provisioning, licensing, and security</li>
-                    <li>Planned and executed the rollout of Microsoft Teams</li>
-                    <li>Maintained Dynamics 365 instance including customizations and reporting</li>
-                    <li>Managed Windows Server and network infrastructure in datacenters, offices, and cloud environments</li>
-                    <li>Maintained customer databases including creating, managing backups, and routine management tasks</li>
-                </ul>
-            </article>
-
-            <article class="experience-item">
-                <div class="experience-header">
-                    <h3>Earlier Experience</h3>
-                    <div class="duration">2012 – 2016</div>
-                </div>
-                <ul>
-                    <li><span class="company">Central Business Systems</span> — Document Management Specialist, Computer Repair Technician</li>
-                    <li><span class="company">RadioShack</span> — Store Manager</li>
-                    <li>Built foundation in technical troubleshooting, small business IT consulting, and team leadership</li>
-                </ul>
-            </article>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills">
-        <div class="container">
-            <div class="section-header">
-                <h2>Skills</h2>
             </div>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>AWS Compute & Containers</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">ECS</span>
-                        <span class="skill-tag">EC2</span>
-                        <span class="skill-tag">Lambda</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">AWS Copilot</span>
-                        <span class="skill-tag">Fargate</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>AWS Data & Storage</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">RDS Aurora</span>
-                        <span class="skill-tag">PostgreSQL</span>
-                        <span class="skill-tag">DynamoDB</span>
-                        <span class="skill-tag">S3</span>
-                        <span class="skill-tag">Transfer Family</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>AWS Networking & Security</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">VPC</span>
-                        <span class="skill-tag">Route 53</span>
-                        <span class="skill-tag">CloudFront</span>
-                        <span class="skill-tag">API Gateway</span>
-                        <span class="skill-tag">Cognito</span>
-                        <span class="skill-tag">IAM</span>
-                        <span class="skill-tag">ACM</span>
-                        <span class="skill-tag">Secrets Manager</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Infrastructure as Code</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Terraform</span>
-                        <span class="skill-tag">Terraform Cloud</span>
-                        <span class="skill-tag">CloudFormation</span>
-                        <span class="skill-tag">AWS Copilot CLI</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>CI/CD Pipelines</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">GitHub Actions</span>
-                        <span class="skill-tag">AWS CodePipeline</span>
-                        <span class="skill-tag">AWS CodeBuild</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">GitHub</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Observability & Monitoring</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">CloudWatch</span>
-                        <span class="skill-tag">CloudWatch Alarms</span>
-                        <span class="skill-tag">Elastic APM</span>
-                        <span class="skill-tag">SNS Notifications</span>
-                        <span class="skill-tag">Log Monitoring</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Scripting & Automation</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Boto3</span>
-                        <span class="skill-tag">Bash</span>
-                        <span class="skill-tag">PowerShell</span>
-                        <span class="skill-tag">Liquibase</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Systems & Platforms</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Linux</span>
-                        <span class="skill-tag">Windows Server</span>
-                        <span class="skill-tag">Jira</span>
-                        <span class="skill-tag">Office 365</span>
-                        <span class="skill-tag">LaunchDarkly</span>
-                    </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title"><span class="hash">##</span> contact</h2>
+                <div class="contact-links">
+                    <a href="mailto:robertpuffe@gmail.com" class="contact-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                        robertpuffe@gmail.com
+                    </a>
+                    <a href="https://linkedin.com/in/robert-puffe-aa092a6a/" target="_blank" rel="noopener noreferrer" class="contact-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                    <a href="https://github.com/rpuffe" target="_blank" rel="noopener noreferrer" class="contact-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+                        </svg>
+                        GitHub
+                    </a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2>Contact</h2>
-            </div>
-            <div class="contact-links">
-                <a href="mailto:robertpuffe@gmail.com" class="contact-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                    </svg>
-                    robertpuffe@gmail.com
-                </a>
-                <a href="https://linkedin.com/in/robert-puffe-aa092a6a/" target="_blank" rel="noopener noreferrer" class="contact-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
-                    </svg>
-                    LinkedIn
-                </a>
-                <a href="https://github.com/rpuffe" target="_blank" rel="noopener noreferrer" class="contact-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
-                    </svg>
-                    GitHub
-                </a>
-                <a href="https://www.robertpuffe.com" target="_blank" rel="noopener noreferrer" class="contact-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                    </svg>
-                    robertpuffe.com
-                </a>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer>
-        <div class="visitor-counter">
-            visitors: <span id="visitor-count">loading...</span>
-        </div>
-        <p>© 2025 Robert Puffe. All rights reserved.</p>
+        <p>© <span id="year">2026</span> Robert Puffe · built with an AI pair programmer, deployed by pipeline</p>
     </footer>
 
-    <!-- Visitor Counter Script - connects to AWS API Gateway -->
+    <!-- Visitor counter: API Gateway → Lambda → DynamoDB -->
     <script>
-        /**
-         * Visitor Counter Integration
-         * 
-         * After deploying the CloudFormation stack, get the API endpoint from the stack outputs:
-         *   aws cloudformation describe-stacks --stack-name YOUR_STACK_NAME \
-         *     --query "Stacks[0].Outputs[?OutputKey=='VisitorCounterApiEndpoint'].OutputValue" \
-         *     --output text
-         * 
-         * Then replace YOUR_API_GATEWAY_ENDPOINT below with the actual URL.
-         */
         async function updateVisitorCount() {
             const counterElement = document.getElementById('visitor-count');
+            const API_ENDPOINT = 'https://ahna38nrf8.execute-api.us-east-1.amazonaws.com/counter';
             try {
-                // TODO: Replace with your API Gateway endpoint after CloudFormation deployment
-                // Example: 'https://abc123xyz.execute-api.us-east-1.amazonaws.com/counter'
-                const API_ENDPOINT = 'https://ahna38nrf8.execute-api.us-east-1.amazonaws.com/counter';
-                
-                if (API_ENDPOINT === 'YOUR_API_GATEWAY_ENDPOINT') {
-                    // Placeholder until API is deployed
-                    counterElement.textContent = '---';
-                    return;
-                }
-                
                 const response = await fetch(API_ENDPOINT);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const data = await response.json();
-                counterElement.textContent = data.count.toLocaleString();
+                counterElement.textContent = '#' + data.count.toLocaleString();
             } catch (error) {
                 console.error('Failed to fetch visitor count:', error);
-                counterElement.textContent = '---';
+                counterElement.textContent = '#?';
             }
         }
-        
-        // Update count on page load
         document.addEventListener('DOMContentLoaded', updateVisitorCount);
+        document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 
-    <!-- Theme Toggle Script -->
+    <!-- Theme toggle -->
     <script>
         (function() {
             const toggle = document.querySelector('.theme-toggle');
             const html = document.documentElement;
-            
-            // Get current theme
+
             function getTheme() {
                 return html.getAttribute('data-theme') || 'dark';
             }
-            
-            // Set theme and save to localStorage
+
             function setTheme(theme) {
                 html.setAttribute('data-theme', theme);
                 localStorage.setItem('theme', theme);
             }
-            
-            // Toggle between light and dark
+
             toggle.addEventListener('click', () => {
                 const current = getTheme();
                 setTheme(current === 'dark' ? 'light' : 'dark');
             });
-            
-            // Listen for system preference changes
+
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-                // Only auto-switch if user hasn't manually set a preference
                 if (!localStorage.getItem('theme')) {
                     setTheme(e.matches ? 'dark' : 'light');
                 }
