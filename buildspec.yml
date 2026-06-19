@@ -1,17 +1,26 @@
 version: 0.2
+
+# Generic static-site deploy pipeline. Nothing here is site-specific:
+# per-site config (domain, expected content) comes from the CodeBuild
+# environment, which is set by the CloudFormation stack.
+env:
+  variables:
+    SRC_DIR: site
+
 phases:
-  install:
-    runtime-versions:
-      nodejs: 12
+  pre_build:
     commands:
-      - echo "installing dependencies"
-      - npm install
+      - bash scripts/validate.sh
+
   build:
     commands:
-      - echo "building site"
-      # - npm run build
+      - echo "Deploying ${SRC_DIR}/ to s3://${S3_BUCKET} ..."
+      - aws s3 sync "./${SRC_DIR}" "s3://${S3_BUCKET}/" --delete --exclude ".DS_Store" --exclude "*/.DS_Store" --exclude "Thumbs.db"
+      - echo "Creating CloudFront invalidation..."
+      - INVALIDATION_ID=$(aws cloudfront create-invalidation --distribution-id ${CloudFrontDistribution} --paths "/*" --query 'Invalidation.Id' --output text)
+      - echo "Waiting for invalidation ${INVALIDATION_ID} to complete..."
+      - aws cloudfront wait invalidation-completed --distribution-id ${CloudFrontDistribution} --id ${INVALIDATION_ID}
+
   post_build:
     commands:
-      - echo "copying files to s3"
-      - aws s3 sync ./site s3://${S3_BUCKET}/ --delete
-      - aws cloudfront create-invalidation --distribution-id ${CloudFrontDistribution} --paths "/*"
+      - bash scripts/smoke-test.sh

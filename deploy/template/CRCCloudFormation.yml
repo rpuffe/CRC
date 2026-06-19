@@ -8,6 +8,10 @@ Parameters:
   HostedZoneId:
     Type: String
     Description: Hosted zone id for site.
+  ExpectedContent:
+    Type: String
+    Default: ""
+    Description: String the deploy smoke test expects to find on the homepage. Leave blank to skip the content check.
 
 Resources:
   
@@ -164,6 +168,12 @@ Resources:
             Value: !Ref env
           - Name: CloudFrontDistribution
             Value: !Ref CloudFrontDistribution
+          - Name: SITE_URL
+            Value: !Sub "https://${DomainName}"
+          - Name: COUNTER_API
+            Value: !Sub "https://${VisitorCounterApi}.execute-api.${AWS::Region}.amazonaws.com/counter"
+          - Name: EXPECTED_CONTENT
+            Value: !Ref ExpectedContent
       Source:
         Type: GITHUB
         Location: https://github.com/rpuffe/CRC.git
