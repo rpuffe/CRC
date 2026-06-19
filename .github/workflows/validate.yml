@@ -1,0 +1,33 @@
+name: validate-site
+
+# Pre-merge gate: runs the same validate.sh that CodeBuild runs in pre_build,
+# but here on the PR — so broken assets / junk files / truncated HTML are
+# caught before they reach main, with no AWS credentials involved.
+on:
+  pull_request:
+    paths:
+      - "site/**"
+      - "scripts/validate.sh"
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "scripts/validate.sh"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate static site
+        env:
+          # Keep in parity with the CloudFormation ExpectedContent parameter.
+          EXPECTED_CONTENT: "Robert"
+        run: bash scripts/validate.sh
+
+      - name: Lint shell scripts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck
+          shellcheck scripts/*.sh
