@@ -48,3 +48,5 @@ This started as a learning project, and a few choices show their age. If I were 
 ## What it costs
 
 About a dollar a month: $0.50 for the Route 53 hosted zone and pennies of S3, CloudFront, Lambda, and DynamoDB usage at this traffic, plus the annual domain registration.
+
+dummy change please
