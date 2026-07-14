@@ -282,10 +282,9 @@
                         <p class="project-eyebrow">platform engineering · aws</p>
                         <h3>Flightdeck</h3>
                         <p class="project-lead">
-                            A constrained delivery platform that turns a container and small YAML
-                            contract into an HTTPS service on AWS. It handles validation, security
-                            scanning, Terraform, credential-free deployment, and immutable promotion
-                            so application repositories stay focused on application code.
+                            I built Flightdeck to keep small application repositories simple. They
+                            provide a Dockerfile and short YAML manifest; reusable workflows handle
+                            Terraform, scanning, HTTPS routing, and promotion in AWS.
                         </p>
                         <div class="project-tags" aria-label="Flightdeck technologies">
                             <span>AWS</span>
@@ -309,8 +308,8 @@
                             <dd>the tested image digest is promoted to production</dd>
                         </div>
                         <div>
-                            <dt>zero keys</dt>
-                            <dd>GitHub deploys through short-lived AWS OIDC credentials</dd>
+                            <dt>no AWS keys</dt>
+                            <dd>GitHub deploys through a short-lived, scoped OIDC role</dd>
                         </div>
                     </dl>
                 </article>

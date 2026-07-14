@@ -17,7 +17,7 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="canonical" href="https://robertpuffe.com/projects.html">
     <meta property="og:title" content="Flightdeck Case Study | Robert Puffe">
-    <meta property="og:description" content="A measured, security-conscious AWS golden path for rapidly delivering containerized applications.">
+    <meta property="og:description" content="How I built a repeatable AWS delivery path for small containerized applications.">
     <meta property="og:url" content="https://robertpuffe.com/projects.html">
     <meta property="og:type" content="article">
     <link rel="stylesheet" href="styles.css?v=6">
@@ -49,9 +49,9 @@
                 <p class="project-status">reference platform · active development</p>
                 <h1>Flightdeck</h1>
                 <p class="project-lead">
-                    An opinionated AWS delivery path for turning a container and a small YAML
-                    manifest into a secure, inspectable HTTPS deployment—without requiring every
-                    application repository to reinvent infrastructure and CI/CD.
+                    I built Flightdeck to give small containerized apps a repeatable path into AWS.
+                    An app supplies a Dockerfile and a small YAML manifest; reusable workflows handle
+                    validation, security checks, infrastructure, HTTPS routing, and promotion.
                 </p>
                 <div class="project-tags" aria-label="Flightdeck technologies">
                     <span>AWS</span>
@@ -74,28 +74,23 @@
             <div class="container">
                 <h2 class="section-title"><span class="hash">##</span> the problem</h2>
                 <p class="project-copy">
-                    AI-assisted tools can produce useful application code quickly, but getting that
-                    code into AWS still requires decisions about identity, networking, state,
-                    security scanning, promotion, rollback, and cost. Flightdeck moves those
-                    decisions into a narrow platform contract so the application supplies only what
-                    the platform genuinely needs.
+                    Generating an application is often faster than deciding how it should
+                    authenticate to AWS, store Terraform state, pass security checks, and move safely
+                    from development to production. I moved those decisions into one platform so
+                    each app does not need its own delivery design.
                 </p>
                 <div class="project-summary-grid">
                     <article class="summary-card">
-                        <h3>small application contract</h3>
-                        <p>A Dockerfile, health endpoint, and versioned manifest replace bespoke infrastructure in every application repository.</p>
+                        <h3>6m 38s fastest cold run</h3>
+                        <p>Measured from a plain-language app specification to a working public HTTPS URL.</p>
                     </article>
                     <article class="summary-card">
-                        <h3>credential-free delivery</h3>
-                        <p>GitHub Actions exchanges repository identity for short-lived, per-application AWS credentials through OIDC.</p>
+                        <h3>short-lived AWS credentials</h3>
+                        <p>GitHub exchanges repository identity for a scoped per-app role through OIDC. There are no stored AWS keys.</p>
                     </article>
                     <article class="summary-card">
-                        <h3>immutable promotion</h3>
-                        <p>Production receives the exact image digest tested in development instead of rebuilding from the same source tag.</p>
-                    </article>
-                    <article class="summary-card">
-                        <h3>cost-aware operation</h3>
-                        <p>Services can scale to zero overnight while shared networking and routing keep the platform economical to demonstrate.</p>
+                        <h3>same image in dev and prod</h3>
+                        <p>Production receives the exact digest tested in development instead of rebuilding from the release tag.</p>
                     </article>
                 </div>
             </div>
@@ -105,10 +100,9 @@
             <div class="container">
                 <h2 class="section-title"><span class="hash">##</span> architecture</h2>
                 <p class="project-copy">
-                    Account-level infrastructure establishes the shared network, routing, image
-                    repositories, OIDC provider, and deployment roles. Each registered application
-                    gets an isolated Terraform state path and a scoped stack for its ECS service,
-                    task definition, logging, alarms, and DNS route.
+                    Flightdeck creates shared networking, routing, ECR, and GitHub OIDC once. Each
+                    app gets its own deployment role, Terraform state path, ECS service, logs,
+                    alarms, and DNS route.
                 </p>
                 <div class="diagram-scroll">
                     <svg class="project-diagram" viewBox="0 0 900 420" role="img" aria-label="Flightdeck architecture: an application repository invokes reusable GitHub Actions, exchanges OIDC identity for a per-app AWS role, builds and scans an image in ECR, and deploys isolated Terraform infrastructure to private ECS tasks behind a shared application load balancer.">
@@ -172,49 +166,19 @@
 
         <section id="controls">
             <div class="container">
-                <h2 class="section-title"><span class="hash">##</span> engineering controls</h2>
-                <div class="decision-grid">
-                    <article class="decision-card">
-                        <h3>identity and blast radius</h3>
-                        <ul class="control-list">
-                            <li>Exact-repository OIDC trust instead of owner-wide access</li>
-                            <li>Per-application deployment roles and permissions boundaries</li>
-                            <li>Application and environment state-path isolation</li>
-                            <li>Private ECS tasks behind a shared HTTPS entry point</li>
-                        </ul>
-                    </article>
-                    <article class="decision-card">
-                        <h3>delivery integrity</h3>
-                        <ul class="control-list">
-                            <li>Schema and preflight validation before AWS mutation</li>
-                            <li>Trivy and Checkov gates for high and critical findings</li>
-                            <li>Saved Terraform plans for reviewed apply behavior</li>
-                            <li>Build-once image promotion with digest verification</li>
-                        </ul>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="container">
-                <h2 class="section-title"><span class="hash">##</span> decisions and tradeoffs</h2>
+                <h2 class="section-title"><span class="hash">##</span> why I built it this way</h2>
                 <div class="decision-grid">
                     <article class="decision-card">
                         <h3>ECS instead of Kubernetes</h3>
-                        <p>The target workload is a small HTTP container. ECS provides the scheduling and AWS integration needed without making cluster administration part of the application contract.</p>
+                        <p>These are small HTTP services. ECS gives me scheduling and AWS integration without making cluster administration part of the app contract.</p>
                     </article>
                     <article class="decision-card">
-                        <h3>contract before portal</h3>
-                        <p>A versioned YAML manifest and reusable workflow test the platform boundary directly. A developer portal would add another interface before the underlying contract is proven.</p>
+                        <h3>a contract before a portal</h3>
+                        <p>I started with a versioned YAML manifest and reusable workflows. That let me prove the platform boundary before adding another interface to maintain.</p>
                     </article>
                     <article class="decision-card">
-                        <h3>shared foundations, isolated apps</h3>
-                        <p>Networking and routing are shared to control cost; deployment roles, state, services, task definitions, storage, and logs remain scoped by application and environment.</p>
-                    </article>
-                    <article class="decision-card">
-                        <h3>cost before high availability</h3>
-                        <p>This reference platform intentionally favors low idle cost and inspectability. Single-task services and scale-to-zero are useful here, but they are not a high-availability claim.</p>
+                        <h3>shared foundation, isolated apps</h3>
+                        <p>Apps share networking and routing to control cost, but each gets scoped identity and state. Releases promote the same tested image digest instead of rebuilding it.</p>
                     </article>
                 </div>
             </div>
@@ -222,55 +186,43 @@
 
         <section id="evidence">
             <div class="container">
-                <h2 class="section-title"><span class="hash">##</span> evidence, not just architecture</h2>
+                <h2 class="section-title"><span class="hash">##</span> what I tested</h2>
                 <div class="evidence-grid">
                     <article class="evidence-card">
-                        <h3>6m 38s fastest cold run</h3>
-                        <p>The measured path started with a plain-language application specification and ended at a public HTTPS URL, including repository creation, build, infrastructure, and deployment.</p>
+                        <h3>the complete delivery path</h3>
+                        <p>I timed the path from an application specification to a public URL, including repository setup, image build, infrastructure, and deployment.</p>
                     </article>
                     <article class="evidence-card">
                         <h3>multiple application shapes</h3>
-                        <p>The same platform contract has delivered several independent applications, exposing reusable-platform problems that a single demonstration would not reveal.</p>
+                        <p>I deployed several independent apps through the same contract. That exposed reusable-platform problems a single sample app would have missed.</p>
                     </article>
                     <article class="evidence-card">
                         <h3>failure-driven hardening</h3>
-                        <p>Real deployments found missing replacement and cleanup permissions, unsafe trust breadth, image-lifecycle risk, and scaler failure behavior. Those became tests and narrower controls.</p>
-                    </article>
-                    <article class="evidence-card">
-                        <h3>documented residual risk</h3>
-                        <p>The specification and threat model state what the platform protects, what it deliberately does not solve, and which operational risks remain instead of hiding them behind a production-ready label.</p>
+                        <p>Live deployments exposed missing replacement and cleanup permissions, overly broad OIDC trust, image-retention risk, and scaler error handling. I fixed those in the platform and added narrower controls or tests.</p>
                     </article>
                 </div>
-                <p class="project-callout">
-                    The strongest result is not the number of AWS services. It is the repeatable
-                    contract: measure the path, capture failures, and improve the control plane
-                    instead of pushing infrastructure complexity into every application.
-                </p>
             </div>
         </section>
 
         <section>
             <div class="container">
-                <h2 class="section-title"><span class="hash">##</span> current boundaries and next proof</h2>
+                <h2 class="section-title"><span class="hash">##</span> boundaries and next steps</h2>
                 <div class="roadmap-card">
                     <p class="project-copy">
-                        Flightdeck is an inspectable reference platform, not a claim that every
-                        workload belongs on this architecture. Its current contract is deliberately
-                        narrow: one HTTP container per service, one AWS region, cost-first task
-                        counts, and limited day-two automation.
+                        This is a reference platform for small HTTP services, not a general hosting
+                        platform. It currently assumes one container, one AWS region, cost-first task
+                        counts, and limited recovery automation.
                     </p>
                     <ul class="roadmap-list">
-                        <li>Run the full disposable lifecycle under the constrained per-app deployment role</li>
-                        <li>Add continuous synthetic monitoring with explicit service objectives</li>
-                        <li>Detect Terraform drift without creating another apply path</li>
-                        <li>Rehearse state and application recovery against disposable resources</li>
-                        <li>Publish a sanitized, durable evidence bundle that works while services sleep</li>
+                        <li>Prove the full create, update, promotion, and destroy lifecycle with a disposable app</li>
+                        <li>Add service monitoring and read-only Terraform drift reporting</li>
+                        <li>Rehearse recovery and publish durable, sanitized evidence</li>
                     </ul>
                 </div>
                 <div class="project-actions project-link-row">
+                    <a href="https://github.com/rpuffe/flightdeck" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View source ↗</a>
+                    <a href="https://github.com/rpuffe/flightdeck/blob/main/spec-docs/flightdeck-spec.md" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Design specification ↗</a>
                     <a href="https://github.com/rpuffe/flightdeck/blob/main/spec-docs/threat-model.md" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Threat model ↗</a>
-                    <a href="https://github.com/rpuffe/flightdeck/milestone/8" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Current milestone ↗</a>
-                    <a href="https://github.com/rpuffe/flightdeck/issues" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Open issues ↗</a>
                 </div>
             </div>
         </section>
