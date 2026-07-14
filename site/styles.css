@@ -638,6 +638,13 @@ section {
     margin-bottom: 2rem;
 }
 
+.project-demo-note {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    margin-top: 1rem;
+    max-width: 680px;
+}
+
 .project-diagram {
     display: block;
     width: 100%;

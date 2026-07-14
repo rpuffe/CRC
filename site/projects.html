@@ -26,9 +26,9 @@
     <header class="site-header">
         <a href="index.html" class="logo">rpuffe<span class="logo-at">@</span>aws<span class="logo-prompt">:~$</span></a>
         <nav class="header-nav">
-            <a href="#overview">overview</a>
+            <a href="#demo">demo</a>
             <a href="#flightdeck-architecture">architecture</a>
-            <a href="#controls">controls</a>
+            <a href="#controls">decisions</a>
             <a href="#evidence">evidence</a>
             <a href="index.html">resume</a>
         </nav>
@@ -93,6 +93,26 @@
                         <p>Production receives the exact digest tested in development instead of rebuilding from the release tag.</p>
                     </article>
                 </div>
+            </div>
+        </section>
+
+        <section id="demo">
+            <div class="container">
+                <h2 class="section-title"><span class="hash">##</span> see it running</h2>
+                <p class="project-copy">
+                    Golf is a small application I use to exercise Flightdeck's delivery path.
+                    Changes merged to main deploy to development. A versioned release promotes the
+                    exact image already tested there into production without rebuilding it.
+                </p>
+                <div class="project-actions">
+                    <a href="https://golf.fd.robertpuffe.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open production ↗</a>
+                    <a href="https://golf-dev.fd.robertpuffe.com" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Open development ↗</a>
+                </div>
+                <p class="project-demo-note">
+                    Both services scale to zero overnight to control cost. If a link is unavailable,
+                    the <a href="https://wake.fd.robertpuffe.com" target="_blank" rel="noopener noreferrer">fleet status page</a>
+                    can start it; startup usually takes about a minute.
+                </p>
             </div>
         </section>
 
