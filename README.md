@@ -21,7 +21,10 @@ Infrastructure deploys through CloudFormation Git sync. After the initial creati
 ## Repo layout
 
 ```
-site/                          # the static site (HTML/CSS, favicons)
+site/index.html                # resume homepage
+site/projects.html             # project case studies
+site/styles.css                # shared responsive dark/light theme
+site/                          # favicons and image assets
 deploy/template/               # CloudFormation template (all infrastructure)
 deploy/deployparams.yml        # stack parameters (CloudFormation Git sync)
 buildspec.yml                  # CodeBuild: sync site/ to S3 + invalidate CDN

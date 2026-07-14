@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <script>
+        (function() {
+            const saved = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flightdeck Case Study | Robert Puffe</title>
+    <meta name="description" content="How Robert Puffe built Flightdeck: an AWS application delivery reference platform using Terraform, ECS Fargate, GitHub Actions, and OIDC.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="canonical" href="https://robertpuffe.com/projects.html">
+    <meta property="og:title" content="Flightdeck Case Study | Robert Puffe">
+    <meta property="og:description" content="How I built a repeatable AWS delivery path for small containerized applications.">
+    <meta property="og:url" content="https://robertpuffe.com/projects.html">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="styles.css?v=6">
+</head>
+<body>
+    <header class="site-header">
+        <a href="index.html" class="logo">rpuffe<span class="logo-at">@</span>aws<span class="logo-prompt">:~$</span></a>
+        <nav class="header-nav">
+            <a href="#demo">demo</a>
+            <a href="#flightdeck-architecture">architecture</a>
+            <a href="#controls">decisions</a>
+            <a href="#evidence">evidence</a>
+            <a href="index.html">resume</a>
+        </nav>
+        <button class="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">
+            <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 000-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
+            </svg>
+            <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3a9 9 0 109 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 01-4.4 2.26 5.403 5.403 0 01-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>
+            </svg>
+        </button>
+    </header>
+
+    <main id="overview">
+        <section class="project-page-hero">
+            <div class="container">
+                <a href="index.html#projects" class="back-link">← back to resume</a>
+                <p class="project-status">reference platform · active development</p>
+                <h1>Flightdeck</h1>
+                <p class="project-lead">
+                    I built Flightdeck to give small containerized apps a repeatable path into AWS.
+                    An app supplies a Dockerfile and a small YAML manifest; reusable workflows handle
+                    validation, security checks, infrastructure, HTTPS routing, and promotion.
+                </p>
+                <div class="project-tags" aria-label="Flightdeck technologies">
+                    <span>AWS</span>
+                    <span>Terraform</span>
+                    <span>ECS Fargate</span>
+                    <span>ECR</span>
+                    <span>GitHub Actions</span>
+                    <span>OIDC</span>
+                    <span>Trivy</span>
+                    <span>Checkov</span>
+                </div>
+                <div class="project-actions">
+                    <a href="https://github.com/rpuffe/flightdeck" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View repository ↗</a>
+                    <a href="https://github.com/rpuffe/flightdeck/blob/main/spec-docs/flightdeck-spec.md" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Read the specification ↗</a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title"><span class="hash">##</span> the problem</h2>
+                <p class="project-copy">
+                    Generating an application is often faster than deciding how it should
+                    authenticate to AWS, store Terraform state, pass security checks, and move safely
+                    from development to production. I moved those decisions into one platform so
+                    each app does not need its own delivery design.
+                </p>
+                <div class="project-summary-grid">
+                    <article class="summary-card">
+                        <h3>6m 38s fastest cold run</h3>
+                        <p>Measured from a plain-language app specification to a working public HTTPS URL.</p>
+                    </article>
+                    <article class="summary-card">
+                        <h3>short-lived AWS credentials</h3>
+                        <p>GitHub exchanges repository identity for a scoped per-app role through OIDC. There are no stored AWS keys.</p>
+                    </article>
+                    <article class="summary-card">
+                        <h3>same image in dev and prod</h3>
+                        <p>Production receives the exact digest tested in development instead of rebuilding from the release tag.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="demo">
+            <div class="container">
+                <h2 class="section-title"><span class="hash">##</span> see it running</h2>
+                <p class="project-copy">
+                    Golf is a small application I use to exercise Flightdeck's delivery path.
+                    Changes merged to main deploy to development. A versioned release promotes the
+                    exact image already tested there into production without rebuilding it.
+                </p>
+                <div class="project-actions">
+                    <a href="https://golf.fd.robertpuffe.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open production ↗</a>
+                    <a href="https://golf-dev.fd.robertpuffe.com" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Open development ↗</a>
+                </div>
+                <p class="project-demo-note">
+                    Both services scale to zero overnight to control cost. If a link is unavailable,
+                    the <a href="https://wake.fd.robertpuffe.com" target="_blank" rel="noopener noreferrer">fleet status page</a>
+                    can start it; startup usually takes about a minute.
+                </p>
+            </div>
+        </section>
+
+        <section id="flightdeck-architecture">
+            <div class="container">
+                <h2 class="section-title"><span class="hash">##</span> architecture</h2>
+                <p class="project-copy">
+                    Flightdeck creates shared networking, routing, ECR, and GitHub OIDC once. Each
+                    app gets its own deployment role, Terraform state path, ECS service, logs,
+                    alarms, and DNS route.
+                </p>
+                <div class="diagram-scroll">
+                    <svg class="project-diagram" viewBox="0 0 900 420" role="img" aria-label="Flightdeck architecture: an application repository invokes reusable GitHub Actions, exchanges OIDC identity for a per-app AWS role, builds and scans an image in ECR, and deploys isolated Terraform infrastructure to private ECS tasks behind a shared application load balancer.">
+                        <defs>
+                            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                <path d="M0,0 L10,5 L0,10 z" class="diag-arrow"/>
+                            </marker>
+                        </defs>
+
+                        <rect x="245" y="18" width="625" height="365" rx="12" class="diag-boundary"/>
+                        <text x="262" y="368" class="diag-note">AWS account · Terraform-managed Flightdeck resources</text>
+
+                        <rect x="20" y="62" width="170" height="58" rx="8" class="diag-box"/>
+                        <text x="105" y="85" class="diag-label" text-anchor="middle">app repository</text>
+                        <text x="105" y="104" class="diag-sub" text-anchor="middle">Dockerfile + manifest</text>
+
+                        <rect x="20" y="185" width="170" height="58" rx="8" class="diag-box"/>
+                        <text x="105" y="208" class="diag-label" text-anchor="middle">reusable workflow</text>
+                        <text x="105" y="227" class="diag-sub" text-anchor="middle">validate · scan · deploy</text>
+
+                        <rect x="275" y="55" width="170" height="58" rx="8" class="diag-box"/>
+                        <text x="360" y="78" class="diag-label" text-anchor="middle">GitHub OIDC role</text>
+                        <text x="360" y="97" class="diag-sub" text-anchor="middle">exact repo · per app</text>
+
+                        <rect x="500" y="55" width="145" height="58" rx="8" class="diag-box"/>
+                        <text x="572" y="78" class="diag-label" text-anchor="middle">Amazon ECR</text>
+                        <text x="572" y="97" class="diag-sub" text-anchor="middle">scanned image</text>
+
+                        <rect x="705" y="55" width="135" height="58" rx="8" class="diag-box"/>
+                        <text x="772" y="78" class="diag-label" text-anchor="middle">Terraform state</text>
+                        <text x="772" y="97" class="diag-sub" text-anchor="middle">isolated path</text>
+
+                        <rect x="275" y="195" width="170" height="58" rx="8" class="diag-box"/>
+                        <text x="360" y="218" class="diag-label" text-anchor="middle">shared ALB + DNS</text>
+                        <text x="360" y="237" class="diag-sub" text-anchor="middle">HTTPS routing</text>
+
+                        <rect x="500" y="195" width="145" height="58" rx="8" class="diag-box"/>
+                        <text x="572" y="218" class="diag-label" text-anchor="middle">ECS Fargate</text>
+                        <text x="572" y="237" class="diag-sub" text-anchor="middle">private tasks</text>
+
+                        <rect x="705" y="195" width="135" height="58" rx="8" class="diag-box"/>
+                        <text x="772" y="218" class="diag-label" text-anchor="middle">CloudWatch</text>
+                        <text x="772" y="237" class="diag-sub" text-anchor="middle">logs + alarms</text>
+
+                        <rect x="500" y="305" width="145" height="48" rx="8" class="diag-box"/>
+                        <text x="572" y="327" class="diag-label" text-anchor="middle">dev → prod</text>
+                        <text x="572" y="344" class="diag-sub" text-anchor="middle">same digest</text>
+
+                        <path d="M105,120 V177" class="diag-line"/>
+                        <path d="M190,214 H230 V84 H267" class="diag-line"/>
+                        <path d="M445,84 H492" class="diag-line"/>
+                        <path d="M645,84 H697" class="diag-line"/>
+                        <path d="M360,113 V187" class="diag-line"/>
+                        <path d="M445,224 H492" class="diag-line"/>
+                        <path d="M645,224 H697" class="diag-line"/>
+                        <path d="M572,253 V297" class="diag-line"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <section id="controls">
+            <div class="container">
+                <h2 class="section-title"><span class="hash">##</span> why I built it this way</h2>
+                <div class="decision-grid">
+                    <article class="decision-card">
+                        <h3>ECS instead of Kubernetes</h3>
+                        <p>These are small HTTP services. ECS gives me scheduling and AWS integration without making cluster administration part of the app contract.</p>
+                    </article>
+                    <article class="decision-card">
+                        <h3>a contract before a portal</h3>
+                        <p>I started with a versioned YAML manifest and reusable workflows. That let me prove the platform boundary before adding another interface to maintain.</p>
+                    </article>
+                    <article class="decision-card">
+                        <h3>shared foundation, isolated apps</h3>
+                        <p>Apps share networking and routing to control cost, but each gets scoped identity and state. Releases promote the same tested image digest instead of rebuilding it.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="evidence">
+            <div class="container">
+                <h2 class="section-title"><span class="hash">##</span> what I tested</h2>
+                <div class="evidence-grid">
+                    <article class="evidence-card">
+                        <h3>the complete delivery path</h3>
+                        <p>I timed the path from an application specification to a public URL, including repository setup, image build, infrastructure, and deployment.</p>
+                    </article>
+                    <article class="evidence-card">
+                        <h3>multiple application shapes</h3>
+                        <p>I deployed several independent apps through the same contract. That exposed reusable-platform problems a single sample app would have missed.</p>
+                    </article>
+                    <article class="evidence-card">
+                        <h3>failure-driven hardening</h3>
+                        <p>Live deployments exposed missing replacement and cleanup permissions, overly broad OIDC trust, image-retention risk, and scaler error handling. I fixed those in the platform and added narrower controls or tests.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title"><span class="hash">##</span> boundaries and next steps</h2>
+                <div class="roadmap-card">
+                    <p class="project-copy">
+                        This is a reference platform for small HTTP services, not a general hosting
+                        platform. It currently assumes one container, one AWS region, cost-first task
+                        counts, and limited recovery automation.
+                    </p>
+                    <ul class="roadmap-list">
+                        <li>Prove the full create, update, promotion, and destroy lifecycle with a disposable app</li>
+                        <li>Add service monitoring and read-only Terraform drift reporting</li>
+                        <li>Rehearse recovery and publish durable, sanitized evidence</li>
+                    </ul>
+                </div>
+                <div class="project-actions project-link-row">
+                    <a href="https://github.com/rpuffe/flightdeck" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View source ↗</a>
+                    <a href="https://github.com/rpuffe/flightdeck/blob/main/spec-docs/flightdeck-spec.md" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Design specification ↗</a>
+                    <a href="https://github.com/rpuffe/flightdeck/blob/main/spec-docs/threat-model.md" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Threat model ↗</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© <span id="year">2026</span> Robert Puffe · <a href="index.html">resume</a> · <a href="https://github.com/rpuffe/flightdeck" target="_blank" rel="noopener noreferrer">source</a></p>
+    </footer>
+
+    <script>
+        (function() {
+            const toggle = document.querySelector('.theme-toggle');
+            const html = document.documentElement;
+
+            function setTheme(theme) {
+                html.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+            }
+
+            toggle.addEventListener('click', () => {
+                setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+            });
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+                if (!localStorage.getItem('theme')) {
+                    setTheme(event.matches ? 'dark' : 'light');
+                }
+            });
+
+            document.getElementById('year').textContent = new Date().getFullYear();
+        })();
+    </script>
+</body>
+</html>
