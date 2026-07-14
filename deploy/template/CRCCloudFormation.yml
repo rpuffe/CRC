@@ -182,9 +182,11 @@ Resources:
         Webhook: true
         FilterGroups:
           - - Type: EVENT
-              Pattern: PUSH,PULL_REQUEST_MERGED
+              Pattern: PUSH
+            - Type: HEAD_REF
+              Pattern: ^refs/heads/main$
             - Type: FILE_PATH
-              Pattern: site/.
+              Pattern: ^site/
       SourceVersion: main
       Tags:
         - Key: Name
