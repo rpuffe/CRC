@@ -23,7 +23,7 @@
     <meta property="og:description" content="AWS, Terraform, CI/CD. The site you're clicking runs on the same stack it describes.">
     <meta property="og:url" content="https://robertpuffe.com">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="styles.css?v=5">
+    <link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body>
     <!-- Sticky header -->
@@ -32,6 +32,7 @@
         <nav class="header-nav">
             <a href="#experience">experience</a>
             <a href="#skills">skills</a>
+            <a href="projects.html">projects</a>
             <a href="#architecture">how it's built</a>
             <a href="#contact">contact</a>
         </nav>
@@ -266,6 +267,53 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Featured project -->
+        <section id="projects" class="featured-projects">
+            <div class="container">
+                <div class="section-heading-row">
+                    <h2 class="section-title"><span class="hash">##</span> featured project</h2>
+                    <a href="projects.html" class="section-link">view case study →</a>
+                </div>
+                <article class="featured-project-card">
+                    <div class="featured-project-copy">
+                        <p class="project-eyebrow">platform engineering · aws</p>
+                        <h3>Flightdeck</h3>
+                        <p class="project-lead">
+                            A constrained delivery platform that turns a container and small YAML
+                            contract into an HTTPS service on AWS. It handles validation, security
+                            scanning, Terraform, credential-free deployment, and immutable promotion
+                            so application repositories stay focused on application code.
+                        </p>
+                        <div class="project-tags" aria-label="Flightdeck technologies">
+                            <span>AWS</span>
+                            <span>Terraform</span>
+                            <span>ECS Fargate</span>
+                            <span>GitHub Actions</span>
+                            <span>OIDC</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="projects.html" class="btn btn-primary">Read the case study</a>
+                            <a href="https://github.com/rpuffe/flightdeck" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">View source ↗</a>
+                        </div>
+                    </div>
+                    <dl class="project-proof-list">
+                        <div>
+                            <dt>6m 38s</dt>
+                            <dd>fastest measured cold spec-to-URL run</dd>
+                        </div>
+                        <div>
+                            <dt>build once</dt>
+                            <dd>the tested image digest is promoted to production</dd>
+                        </div>
+                        <div>
+                            <dt>zero keys</dt>
+                            <dd>GitHub deploys through short-lived AWS OIDC credentials</dd>
+                        </div>
+                    </dl>
+                </article>
             </div>
         </section>
 
