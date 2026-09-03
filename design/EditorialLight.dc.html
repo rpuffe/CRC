@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+  <style>
+    body { margin: 0; background: #ffffff; }
+    .page { font-family: 'IBM Plex Sans', -apple-system, 'Segoe UI', sans-serif; color: #1f2328; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    .serif { font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; }
+    .mono { font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; }
+    a { color: #0969da; text-decoration: none; }
+    a:hover { color: #0550ae; text-decoration: underline; }
+    .nav a { font-size: 14px; color: #57606a; }
+    .nav a:hover { color: #1f2328; }
+    .date { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 12.5px; color: #8c959f; }
+    .bullets { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+    .bullets li { position: relative; padding-left: 18px; color: #57606a; font-size: 15px; max-width: 620px; }
+    .bullets li::before { content: ''; position: absolute; left: 0; top: 11px; width: 6px; height: 1px; background: #1a7f37; }
+  </style>
+</helmet>
+<div class="page" style="width: 1200px; min-height: 1100px; background: #ffffff; display: flex; flex-direction: column;">
+
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 22px 96px; border-bottom: 1px solid #d0d7de;">
+    <span class="serif" style="font-size: 20px; font-weight: 600; color: #1f2328;">Robert Puffe</span>
+    <nav class="nav" style="display: flex; gap: 28px;">
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#architecture">How it's built</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section style="padding: 88px 96px 72px; display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 64px; align-items: start;">
+    <div style="display: flex; flex-direction: column;">
+      <p class="mono" style="margin: 0 0 20px; font-size: 13px; color: #1a7f37;">$ whoami</p>
+      <h1 class="serif" style="margin: 0 0 18px; font-size: 64px; font-weight: 600; line-height: 1.05; letter-spacing: -0.015em; color: #1f2328;">DevOps Lead who came up through IT support.</h1>
+      <p style="margin: 0 0 28px; max-width: 580px; font-size: 18px; color: #57606a;">Ten years at Eldermark, from IT support to leading DevOps. I work on the pipelines, environments, and automation that help our dev teams ship, mostly on AWS with Terraform.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: baseline;">
+        <span class="mono" style="font-size: 13px; color: #8c959f;">Remote (US) · Jamestown, ND</span>
+        <a href="mailto:robertpuffe@gmail.com" class="mono" style="font-size: 13px;">robertpuffe@gmail.com</a>
+        <a href="https://linkedin.com/in/robert-puffe-aa092a6a/" class="mono" style="font-size: 13px;">LinkedIn</a>
+        <a href="https://github.com/rpuffe" class="mono" style="font-size: 13px;">GitHub</a>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 10px; padding-top: 8px;">
+      <img src="robert.jpg" alt="Robert Puffe playing guitar at a live show" style="display: block; box-sizing: border-box; width: 260px; height: 260px; object-fit: cover; border-radius: 6px; border: 1px solid #d0d7de;">
+      <span class="mono" style="font-size: 12px; color: #8c959f;">Not a headshot. Weekend gig.</span>
+    </div>
+  </section>
+
+  <section id="experience" style="padding: 56px 96px 72px; border-top: 1px solid #d0d7de; display: flex; flex-direction: column; gap: 36px;">
+    <h2 class="serif" style="margin: 0; font-size: 30px; font-weight: 600; color: #1f2328;">Experience</h2>
+    <article style="display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 40px;">
+      <div style="display: flex; flex-direction: column; gap: 4px; padding-top: 4px;">
+        <span class="date" style="color: #1a7f37;">Mar 2024 – Present</span>
+        <span style="font-size: 14px; font-weight: 500; color: #1f2328;">Eldermark</span>
+        <span class="date">promoted Apr 2026</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <h3 style="margin: 0; font-size: 20px; font-weight: 600; color: #1f2328;">DevOps Lead</h3>
+        <p style="margin: 0; color: #57606a; font-size: 15.5px; max-width: 620px;">Platform and infrastructure steward for Eldermark's AWS environments, spanning release engineering, infrastructure architecture, and platform engineering.</p>
+        <ul class="bullets">
+          <li>Look after AWS infrastructure for two SaaS products (8 accounts across 10 environments)</li>
+          <li>Redesigned the CI/CD pipeline architecture as reusable Terraform modules, cutting about 20 minutes of downtime from every production deployment</li>
+          <li>Replaced a manual, day-long environment refresh with a push-button CodePipeline</li>
+          <li>Built deployment tracking on Lambda and CodePipeline events that posts to Teams and moves Jira tickets automatically</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+</div>
+</x-dc>
+</body>
+</html>

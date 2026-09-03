@@ -1,0 +1,12 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "title": "Refined terminal (leading)", "x": 0, "y": 0, "w": 1280, "h": 4400 },
+    { "file": "EditorialLight.dc.html", "title": "Option B · Editorial light", "x": 1400, "y": 0, "w": 1200, "h": 1100 },
+    { "file": "OpsConsole.dc.html", "title": "Option C · Ops console", "x": 1400, "y": 1260, "w": 1200, "h": 1100 }
+  ],
+  "annotations": [
+    { "id": "accuracy-fixes", "x": -620, "y": 0, "w": 540, "text": "Accuracy changes folded into the leading design (vs. the live site):\n\n1. Deploys run through a CodeBuild webhook, not CodePipeline. The live site says CodePipeline in the meta description, the intro, and the diagram.\n2. \"9+ yrs\" and \"nine years\" are now 10: Eldermark started Sep 2016.\n3. \"Drove the company's adoption\" softened to \"Helped lead\".\n4. \"Own AWS infrastructure\" softened to \"Look after\".\n5. Sysadmin bullet about the contractor transition no longer claims cost savings (no figure to back it).\n6. Counter value #1,284 is a sample.\n\nStill to confirm: the 8 accounts / 10 environments count." },
+    { "id": "how-to-compare", "x": 1400, "y": -420, "w": 520, "text": "Two alternate directions, hero + first section only.\n\nB · Editorial light: the professional end. Serif display, white page, terminal reduced to a single wink.\nC · Ops console: the fun end. Status pills, career as a pipeline, mono everywhere.\n\nThe leading design sits between them: same tokens as the live site, sans headings, mono kept for prompts and metadata." }
+  ],
+  "launch": { "view": "canvas" }
+}

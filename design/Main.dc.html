@@ -1,0 +1,341 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
+  <style>
+    body { margin: 0; background: #0d1117; }
+    .page { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #e6edf3; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    .mono { font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace; }
+    a { color: #58a6ff; text-decoration: none; }
+    a:hover { color: #79b8ff; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 32px; }
+    .nav a { font-family: 'JetBrains Mono', Menlo, monospace; font-size: 13px; color: #9aa4b2; }
+    .nav a:hover { color: #3fb950; }
+    .eyebrow { font-family: 'JetBrains Mono', Menlo, monospace; font-size: 13px; color: #3fb950; letter-spacing: 0.02em; }
+    .h2 { font-size: 26px; font-weight: 600; line-height: 1.2; color: #e6edf3; margin: 0; }
+    .h2 .hash { font-family: 'JetBrains Mono', Menlo, monospace; color: #3fb950; margin-right: 10px; font-weight: 600; }
+    .date { font-family: 'JetBrains Mono', Menlo, monospace; font-size: 12.5px; color: #6e7681; line-height: 1.5; }
+    .company { font-family: 'JetBrains Mono', Menlo, monospace; font-size: 13px; color: #58a6ff; }
+    .role { font-size: 18px; font-weight: 600; color: #e6edf3; margin: 0; line-height: 1.3; }
+    .desc { color: #9aa4b2; font-size: 15px; margin: 0; max-width: 640px; }
+    .bullets { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+    .bullets li { position: relative; padding-left: 22px; color: #9aa4b2; font-size: 14.5px; max-width: 680px; }
+    .bullets li::before { content: '→'; position: absolute; left: 0; color: #3fb950; font-family: 'JetBrains Mono', Menlo, monospace; }
+    .tag { font-family: 'JetBrains Mono', Menlo, monospace; font-size: 12px; padding: 4px 10px; background: #21262d; color: #9aa4b2; border: 1px solid #30363d; border-radius: 5px; white-space: nowrap; }
+    .skillcat { font-family: 'JetBrains Mono', Menlo, monospace; font-size: 12.5px; font-weight: 600; color: #e6edf3; }
+    .skillcat::before { content: '> '; color: #3fb950; }
+    .btn { font-family: 'JetBrains Mono', Menlo, monospace; font-size: 14px; padding: 10px 20px; border-radius: 8px; display: inline-block; }
+    .btn-primary { background: #3fb950; color: #0d1117; font-weight: 600; border: 1px solid #3fb950; }
+    .btn-primary:hover { color: #0d1117; filter: brightness(1.1); }
+    .btn-ghost { color: #9aa4b2; border: 1px solid #30363d; }
+    .btn-ghost:hover { color: #3fb950; border-color: #3fb950; }
+    .diag-label { font-family: 'JetBrains Mono', Menlo, monospace; font-size: 13px; font-weight: 600; fill: #e6edf3; }
+    .diag-sub { font-family: 'JetBrains Mono', Menlo, monospace; font-size: 10px; fill: #6e7681; }
+    .diag-note { font-family: 'JetBrains Mono', Menlo, monospace; font-size: 11px; fill: #58a6ff; }
+  </style>
+</helmet>
+<div class="page" style="width: 1280px; min-height: 4400px; background: #0d1117; display: flex; flex-direction: column;">
+
+  <!-- Header -->
+  <header style="display: flex; align-items: center; gap: 32px; padding: 12px 32px; background: rgba(13, 17, 23, 0.85); border-bottom: 1px solid #30363d;">
+    <a href="#top" class="mono" style="font-size: 15px; font-weight: 600; color: #e6edf3;">rpuffe<span style="color: #3fb950;">@</span>aws<span style="color: #3fb950;">:~$</span></a>
+    <nav class="nav" style="display: flex; gap: 24px; margin-left: auto;">
+      <a href="#experience">experience</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#architecture">how it's built</a>
+      <a href="#contact">contact</a>
+    </nav>
+    <div style="width: 36px; height: 36px; border: 1px solid #30363d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e6edf3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section style="padding: 80px 0 88px;">
+    <div class="container" style="display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 56px; align-items: center;">
+      <div style="display: flex; flex-direction: column; gap: 0;">
+        <p class="mono" style="margin: 0 0 14px; color: #3fb950; font-size: 14px;">$ whoami</p>
+        <h1 style="margin: 0 0 12px; font-size: 56px; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: #e6edf3;">Robert Puffe</h1>
+        <p class="mono" style="margin: 0 0 6px; font-size: 17px; color: #9aa4b2;">DevOps Lead at Eldermark · AWS · Terraform · CI/CD</p>
+        <p class="mono" style="margin: 0 0 24px; font-size: 13.5px; color: #6e7681;"><span style="color: #3fb950;">~ </span>Remote (US) · based in Jamestown, ND</p>
+        <p style="margin: 0 0 28px; max-width: 560px; color: #9aa4b2; font-size: 16.5px;">Ten years at the same company, growing from IT support into DevOps. I work on the pipelines, environments, and automation that help our dev teams ship, and I try to automate anything I catch myself doing twice.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px;">
+          <span class="mono" style="font-size: 12.5px; color: #3fb950; background: rgba(63, 185, 80, 0.12); border-radius: 999px; padding: 5px 14px;">10 yrs at Eldermark</span>
+          <span class="mono" style="font-size: 12.5px; color: #3fb950; background: rgba(63, 185, 80, 0.12); border-radius: 999px; padding: 5px 14px;">5 yrs hands-on AWS</span>
+          <span class="mono" style="font-size: 12.5px; color: #3fb950; background: rgba(63, 185, 80, 0.12); border-radius: 999px; padding: 5px 14px;">3 promotions</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+          <a href="#contact" class="btn btn-primary">Get in touch</a>
+          <a href="#architecture" class="btn btn-ghost">See how this site is built ↓</a>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: center;">
+        <div style="width: 320px; box-sizing: border-box; background: #161b22; border: 1px solid #30363d; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);">
+          <div style="display: flex; align-items: center; gap: 6px; padding: 10px 14px; border-bottom: 1px solid #30363d;">
+            <span style="width: 11px; height: 11px; border-radius: 50%; background: #ff5f57;"></span>
+            <span style="width: 11px; height: 11px; border-radius: 50%; background: #febc2e;"></span>
+            <span style="width: 11px; height: 11px; border-radius: 50%; background: #28c840;"></span>
+            <span class="mono" style="font-size: 11px; color: #6e7681; margin-left: 8px;">robert.jpg</span>
+          </div>
+          <img src="robert.jpg" alt="Robert Puffe playing guitar at a live show" style="display: block; width: 318px; height: 318px; object-fit: cover;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" style="padding: 72px 0; border-top: 1px solid #30363d;">
+    <div class="container" style="display: flex; flex-direction: column; gap: 40px;">
+      <h2 class="h2"><span class="hash">##</span>Experience</h2>
+
+      <div style="display: flex; flex-direction: column; gap: 48px;">
+
+        <article style="display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 32px;">
+          <div style="display: flex; flex-direction: column; gap: 4px; padding-top: 3px;">
+            <span class="date" style="color: #3fb950;">Mar 2024 – Present</span>
+            <span class="company">Eldermark</span>
+            <span class="date">promoted Apr 2026</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <h3 class="role">DevOps Lead</h3>
+              <span class="date">previously DevOps Engineer, Mar 2024 – Apr 2026</span>
+            </div>
+            <p class="desc">Platform and infrastructure steward for Eldermark's AWS environments. The work spans release engineering, infrastructure architecture, and platform engineering: catching risky changes before they become incidents, and keeping releases moving while making the platform more self-service and less reactive.</p>
+            <ul class="bullets">
+              <li>Look after AWS infrastructure for two SaaS products (8 accounts across 10 environments) and help support two additional product platforms</li>
+              <li>Redesigned the CI/CD pipeline architecture as reusable Terraform modules, cutting about 20 minutes of downtime from every production deployment</li>
+              <li>Build and maintain 20+ pipelines across GitHub Actions, AWS CodePipeline, and Terraform, including staging promotion flows and shared ECR base images</li>
+              <li>Replaced a manual, day-long environment refresh with a push-button CodePipeline, removing human error from production database restores</li>
+              <li>Built deployment tracking on Lambda and CodePipeline events that posts to Teams and moves Jira tickets automatically</li>
+              <li>Helped lead the company's early adoption of AI development tools, from proofs of concept to everyday use</li>
+              <li>Review infrastructure and deployment changes early in the SDLC, and respond to production issues when they happen</li>
+              <li>Work with leadership on security audits, penetration-test remediation, and container security practices for compliance</li>
+            </ul>
+          </div>
+        </article>
+
+        <article style="display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 32px;">
+          <div style="display: flex; flex-direction: column; gap: 4px; padding-top: 3px;">
+            <span class="date">May 2021 – Mar 2024</span>
+            <span class="company">Eldermark</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <h3 class="role">System Administrator</h3>
+            <p class="desc">End-to-end administration of AWS and on-premise infrastructure supporting internal and customer-facing products.</p>
+            <ul class="bullets">
+              <li>Took on DevOps responsibilities for environments and pipelines</li>
+              <li>Helped bring the DevOps function in-house from an outside contractor</li>
+              <li>Migrated workloads to AWS using EC2, S3, Transfer Family, and Terraform</li>
+              <li>Consolidated several Office 365 and Google Workspace tenants into a single shared Office 365 tenant</li>
+            </ul>
+          </div>
+        </article>
+
+        <article style="display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 32px;">
+          <div style="display: flex; flex-direction: column; gap: 4px; padding-top: 3px;">
+            <span class="date">Sep 2016 – May 2021</span>
+            <span class="company">Eldermark</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <h3 class="role">IT Specialist</h3>
+            <ul class="bullets">
+              <li>Helped move the company to remote work during the pandemic</li>
+              <li>Managed Office 365 provisioning, licensing, and security, and rolled out Microsoft Teams</li>
+              <li>Maintained the Dynamics 365 instance, including customizations and reporting</li>
+              <li>Managed Windows Server and network infrastructure across datacenters, offices, and cloud</li>
+            </ul>
+          </div>
+        </article>
+
+        <article style="display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 32px;">
+          <div style="display: flex; flex-direction: column; gap: 4px; padding-top: 3px;">
+            <span class="date">2012 – 2016</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <h3 class="role">Earlier experience</h3>
+            <ul class="bullets">
+              <li><span class="company">Central Business Systems</span> · Document Management Specialist, Computer Repair Technician</li>
+              <li><span class="company">RadioShack</span> · Store Manager</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" style="padding: 72px 0; border-top: 1px solid #30363d;">
+    <div class="container" style="display: flex; flex-direction: column; gap: 40px;">
+      <h2 class="h2"><span class="hash">##</span>Skills</h2>
+      <div style="display: flex; flex-direction: column; background: #161b22; border: 1px solid #30363d; border-radius: 10px; overflow: hidden;">
+        <div style="display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; align-items: center; padding: 14px 20px; border-bottom: 1px solid #30363d;">
+          <span class="skillcat">Compute &amp; containers</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 7px;"><span class="tag">ECS</span><span class="tag">Fargate</span><span class="tag">EC2</span><span class="tag">Lambda</span><span class="tag">Docker</span><span class="tag">AWS Copilot</span></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; align-items: center; padding: 14px 20px; border-bottom: 1px solid #30363d;">
+          <span class="skillcat">Data &amp; storage</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 7px;"><span class="tag">RDS Aurora</span><span class="tag">PostgreSQL</span><span class="tag">DynamoDB</span><span class="tag">S3</span><span class="tag">Transfer Family</span></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; align-items: center; padding: 14px 20px; border-bottom: 1px solid #30363d;">
+          <span class="skillcat">Networking &amp; security</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 7px;"><span class="tag">VPC</span><span class="tag">Route 53</span><span class="tag">CloudFront</span><span class="tag">API Gateway</span><span class="tag">Cognito</span><span class="tag">IAM</span><span class="tag">ACM</span><span class="tag">Secrets Manager</span></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; align-items: center; padding: 14px 20px; border-bottom: 1px solid #30363d;">
+          <span class="skillcat">Infrastructure as code</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 7px;"><span class="tag">Terraform</span><span class="tag">Terraform Cloud</span><span class="tag">CloudFormation</span><span class="tag">AWS Copilot CLI</span></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; align-items: center; padding: 14px 20px; border-bottom: 1px solid #30363d;">
+          <span class="skillcat">CI/CD</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 7px;"><span class="tag">GitHub Actions</span><span class="tag">AWS CodePipeline</span><span class="tag">AWS CodeBuild</span><span class="tag">Git</span></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; align-items: center; padding: 14px 20px; border-bottom: 1px solid #30363d;">
+          <span class="skillcat">Observability</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 7px;"><span class="tag">CloudWatch</span><span class="tag">CloudWatch Alarms</span><span class="tag">Elastic APM</span><span class="tag">SNS</span></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; align-items: center; padding: 14px 20px; border-bottom: 1px solid #30363d;">
+          <span class="skillcat">Scripting &amp; automation</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 7px;"><span class="tag">Python</span><span class="tag">Boto3</span><span class="tag">Bash</span><span class="tag">PowerShell</span><span class="tag">Liquibase</span></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; align-items: center; padding: 14px 20px;">
+          <span class="skillcat">Systems &amp; platforms</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 7px;"><span class="tag">Linux</span><span class="tag">Windows Server</span><span class="tag">Jira</span><span class="tag">Office 365</span><span class="tag">LaunchDarkly</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured project -->
+  <section id="projects" style="padding: 72px 0; border-top: 1px solid #30363d;">
+    <div class="container" style="display: flex; flex-direction: column; gap: 40px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px;">
+        <h2 class="h2"><span class="hash">##</span>Featured project</h2>
+        <a href="#projects" class="mono" style="font-size: 13px;">view case study →</a>
+      </div>
+      <article style="display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(240px, 0.8fr); gap: 40px; padding: 32px; background: #161b22; border: 1px solid #30363d; border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);">
+        <div style="display: flex; flex-direction: column; gap: 0;">
+          <p class="eyebrow" style="margin: 0 0 6px; text-transform: uppercase; letter-spacing: 0.06em; font-size: 12px;">platform engineering · aws</p>
+          <h3 style="margin: 0 0 12px; font-size: 28px; font-weight: 700; letter-spacing: -0.01em; color: #e6edf3;">Flightdeck</h3>
+          <p style="margin: 0; color: #9aa4b2; font-size: 15.5px; max-width: 560px;">I built Flightdeck to keep small application repositories simple. They provide a Dockerfile and a short YAML manifest; reusable workflows handle Terraform, scanning, HTTPS routing, and promotion in AWS.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 7px; margin: 20px 0 24px;">
+            <span class="tag">AWS</span><span class="tag">Terraform</span><span class="tag">ECS Fargate</span><span class="tag">GitHub Actions</span><span class="tag">OIDC</span>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <a href="#projects" class="btn btn-primary">Read the case study</a>
+            <a href="https://github.com/rpuffe/flightdeck" class="btn btn-ghost">View source ↗</a>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="padding: 16px; background: #0d1117; border: 1px solid #30363d; border-radius: 8px; display: flex; flex-direction: column; gap: 3px;">
+            <span class="mono" style="color: #3fb950; font-weight: 600; font-size: 15px;">6m 38s</span>
+            <span style="color: #6e7681; font-size: 13px; line-height: 1.5;">fastest measured cold spec-to-URL run</span>
+          </div>
+          <div style="padding: 16px; background: #0d1117; border: 1px solid #30363d; border-radius: 8px; display: flex; flex-direction: column; gap: 3px;">
+            <span class="mono" style="color: #3fb950; font-weight: 600; font-size: 15px;">build once</span>
+            <span style="color: #6e7681; font-size: 13px; line-height: 1.5;">the tested image digest is promoted to production</span>
+          </div>
+          <div style="padding: 16px; background: #0d1117; border: 1px solid #30363d; border-radius: 8px; display: flex; flex-direction: column; gap: 3px;">
+            <span class="mono" style="color: #3fb950; font-weight: 600; font-size: 15px;">no AWS keys</span>
+            <span style="color: #6e7681; font-size: 13px; line-height: 1.5;">GitHub deploys through a short-lived, scoped OIDC role</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- How this site works -->
+  <section id="architecture" style="padding: 72px 0; border-top: 1px solid #30363d;">
+    <div class="container" style="display: flex; flex-direction: column; gap: 32px;">
+      <h2 class="h2" style="margin-bottom: 8px;"><span class="hash">##</span>How this site works</h2>
+      <p style="margin: 0; color: #9aa4b2; font-size: 16px; max-width: 720px;">This page is its own portfolio piece: my take on the <a href="https://cloudresumechallenge.dev">Cloud Resume Challenge</a>. It's static HTML on S3 served through CloudFront. The visitor counter below is a live call to API Gateway, handled by a Lambda function that increments a count in DynamoDB. The infrastructure is defined in CloudFormation, and every push to <span class="mono" style="font-size: 14px; background: #21262d; border: 1px solid #30363d; border-radius: 4px; padding: 1px 6px;">main</span> triggers a CodeBuild job that syncs the site to S3 and invalidates the CDN, including the change you're reading right now. I run a couple of other sites on the same pattern.</p>
+
+      <svg viewBox="0 0 780 350" width="896" height="402" role="img" aria-label="Architecture diagram" style="display: block;">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6e7681"></path></marker>
+        </defs>
+        <rect x="230" y="8" width="520" height="322" rx="10" fill="rgba(88,166,255,0.1)" stroke="#58a6ff" stroke-width="1" stroke-dasharray="6 6" opacity="0.6"></rect>
+        <text x="484" y="318" class="diag-note">AWS · defined in CloudFormation</text>
+        <rect x="20" y="84" width="130" height="48" rx="8" fill="#161b22" stroke="#30363d"></rect>
+        <text x="85" y="104" class="diag-label" text-anchor="middle">you</text>
+        <text x="85" y="120" class="diag-sub" text-anchor="middle">browser</text>
+        <rect x="260" y="28" width="150" height="44" rx="8" fill="#161b22" stroke="#30363d"></rect>
+        <text x="335" y="47" class="diag-label" text-anchor="middle">CloudFront</text>
+        <text x="335" y="62" class="diag-sub" text-anchor="middle">CDN + TLS</text>
+        <rect x="560" y="28" width="160" height="44" rx="8" fill="#161b22" stroke="#30363d"></rect>
+        <text x="640" y="47" class="diag-label" text-anchor="middle">S3</text>
+        <text x="640" y="62" class="diag-sub" text-anchor="middle">static site</text>
+        <path d="M410,50 H552" fill="none" stroke="#6e7681" stroke-width="1.3" marker-end="url(#arrow)"></path>
+        <text x="481" y="42" class="diag-sub" text-anchor="middle">origin</text>
+        <rect x="260" y="128" width="140" height="44" rx="8" fill="#161b22" stroke="#30363d"></rect>
+        <text x="330" y="147" class="diag-label" text-anchor="middle">API Gateway</text>
+        <text x="330" y="162" class="diag-sub" text-anchor="middle">HTTP API</text>
+        <rect x="450" y="128" width="110" height="44" rx="8" fill="#161b22" stroke="#30363d"></rect>
+        <text x="505" y="147" class="diag-label" text-anchor="middle">Lambda</text>
+        <text x="505" y="162" class="diag-sub" text-anchor="middle">counter fn</text>
+        <rect x="610" y="128" width="120" height="44" rx="8" fill="#161b22" stroke="#30363d"></rect>
+        <text x="670" y="147" class="diag-label" text-anchor="middle">DynamoDB</text>
+        <text x="670" y="162" class="diag-sub" text-anchor="middle">visit count</text>
+        <path d="M400,150 H442" fill="none" stroke="#6e7681" stroke-width="1.3" marker-end="url(#arrow)"></path>
+        <path d="M560,150 H602" fill="none" stroke="#6e7681" stroke-width="1.3" marker-end="url(#arrow)"></path>
+        <path d="M150,96 H205 V50 H252" fill="none" stroke="#6e7681" stroke-width="1.3" marker-end="url(#arrow)"></path>
+        <text x="205" y="40" class="diag-sub" text-anchor="middle">site</text>
+        <path d="M150,120 H205 V150 H252" fill="none" stroke="#6e7681" stroke-width="1.3" marker-end="url(#arrow)"></path>
+        <text x="205" y="178" class="diag-sub" text-anchor="middle">GET /counter</text>
+        <rect x="20" y="276" width="140" height="44" rx="8" fill="#161b22" stroke="#30363d"></rect>
+        <text x="90" y="295" class="diag-label" text-anchor="middle">GitHub</text>
+        <text x="90" y="310" class="diag-sub" text-anchor="middle">rpuffe/CRC · main</text>
+        <rect x="260" y="276" width="200" height="44" rx="8" fill="#161b22" stroke="#30363d"></rect>
+        <text x="360" y="295" class="diag-label" text-anchor="middle">CodeBuild</text>
+        <text x="360" y="310" class="diag-sub" text-anchor="middle">validate → s3 sync → smoke test</text>
+        <path d="M160,298 H252" fill="none" stroke="#6e7681" stroke-width="1.3" marker-end="url(#arrow)"></path>
+        <text x="206" y="290" class="diag-sub" text-anchor="middle">webhook</text>
+        <path d="M460,298 H762 V50 H730" fill="none" stroke="#6e7681" stroke-width="1.3" marker-end="url(#arrow)"></path>
+        <text x="610" y="290" class="diag-sub" text-anchor="middle">deploy site + invalidate CDN</text>
+      </svg>
+
+      <div class="mono" style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; font-size: 14px; background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 16px 22px;">
+        <span style="color: #3fb950;">$ curl api/counter →</span>
+        <span style="color: #e6edf3;">you are visitor <strong style="color: #3fb950;">#1,284</strong></span>
+        <span style="color: #6e7681; font-size: 12.5px;">counted by Lambda, stored in DynamoDB</span>
+      </div>
+      <p style="margin: 0; color: #9aa4b2; font-size: 15px;">Want the details? <a href="https://github.com/rpuffe/CRC">View the source and CloudFormation template on GitHub →</a></p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" style="padding: 72px 0; border-top: 1px solid #30363d;">
+    <div class="container" style="display: flex; flex-direction: column; gap: 40px;">
+      <h2 class="h2"><span class="hash">##</span>Contact</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+        <a href="mailto:robertpuffe@gmail.com" class="mono" style="display: flex; align-items: center; gap: 12px; padding: 14px 22px; background: #161b22; border: 1px solid #30363d; border-radius: 10px; color: #9aa4b2; font-size: 14px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>
+          robertpuffe@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/robert-puffe-aa092a6a/" class="mono" style="display: flex; align-items: center; gap: 12px; padding: 14px 22px; background: #161b22; border: 1px solid #30363d; border-radius: 10px; color: #9aa4b2; font-size: 14px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 10v7M8 7v.5M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"></path></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/rpuffe" class="mono" style="display: flex; align-items: center; gap: 12px; padding: 14px 22px; background: #161b22; border: 1px solid #30363d; border-radius: 10px; color: #9aa4b2; font-size: 14px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.5 1.5-4.5-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"></path></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="text-align: center; padding: 40px 32px; border-top: 1px solid #30363d; margin-top: auto;">
+    <p class="mono" style="margin: 0; font-size: 12.5px; color: #6e7681;">© 2026 Robert Puffe · built with an AI pair programmer, deployed by CodeBuild</p>
+  </footer>
+
+</div>
+</x-dc>
+</body>
+</html>
