@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Robert Puffe | DevOps Lead</title>
-    <meta name="description" content="DevOps lead with 9+ years in tech: AWS, Terraform, and CI/CD pipelines. This site is itself a portfolio piece: S3, CloudFront, Lambda, DynamoDB, deployed by CodePipeline.">
+    <meta name="description" content="DevOps lead with ten years at one company: AWS, Terraform, and CI/CD pipelines. This site is itself a portfolio piece: S3, CloudFront, Lambda, DynamoDB, deployed by CodeBuild.">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -56,14 +56,14 @@
                     <p class="tagline">DevOps Lead · AWS · Terraform · CI/CD</p>
                     <p class="hero-location">Remote (US) · based in Jamestown, ND</p>
                     <p class="summary">
-                        I've spent nine years at the same company, growing from IT support into
+                        I've spent ten years at the same company, growing from IT support into
                         DevOps, long enough to learn that whatever I build, I will be the one
                         maintaining it. I work on the pipelines, environments, and automation that
                         help our dev teams ship, and I try to automate anything I catch myself
                         doing twice.
                     </p>
                     <div class="hero-stats">
-                        <span class="stat">9+ yrs in tech</span>
+                        <span class="stat">10 yrs at Eldermark</span>
                         <span class="stat">5 yrs hands-on AWS</span>
                         <span class="stat">3 promotions</span>
                     </div>
@@ -111,12 +111,12 @@
                         platform more self-service, more secure, and less reactive.
                     </p>
                     <ul>
-                        <li>Own AWS infrastructure for two SaaS products (8 accounts spanning 10 environments) and help support two additional product platforms</li>
+                        <li>Look after AWS infrastructure for two SaaS products (8 accounts spanning 10 environments) and help support two additional product platforms</li>
                         <li>Redesigned the CI/CD pipeline architecture and rebuilt hand-created pipelines as reusable Terraform modules, cutting roughly 20 minutes of downtime from every production deployment</li>
                         <li>Build and maintain 20+ pipelines with GitHub Actions, AWS CodePipeline, and Terraform, including staging promotion flows and automated builds for shared ECR base images</li>
                         <li>Replaced a manual, multi-system environment refresh process with a push-button CodePipeline, saving hours of work per refresh and removing human error from production database restores</li>
                         <li>Built a deployment tracking system on Lambda and CodePipeline events that notifies Teams and updates Jira automatically, so nobody has to chase release status</li>
-                        <li>Drove the company's initial adoption of AI development tools, from early proofs of concept to everyday use that improves development efficiency and code quality</li>
+                        <li>Helped lead the company's early adoption of AI development tools, from proofs of concept to everyday use</li>
                         <li>Respond to production infrastructure issues and review changes early in the SDLC to catch architecture and deployment risks before they reach an environment</li>
                         <li>Implement infrastructure and container security practices that meet compliance and reliability requirements</li>
                         <li>Collaborate with leadership on company-wide initiatives including Jira migrations, security audits, and penetration-test remediation</li>
@@ -136,8 +136,8 @@
                         multiple internal and customer-facing products.
                     </p>
                     <ul>
-                        <li>Managed DevOps responsibilities, overseeing environment and pipeline management</li>
-                        <li>Led successful transition of DevOps team to in-house, resulting in improved efficiency and cost savings</li>
+                        <li>Took on DevOps responsibilities for environments and pipelines</li>
+                        <li>Helped bring the DevOps function in-house from an outside contractor</li>
                         <li>Migrated workloads to AWS using EC2, S3, Transfer Family, and Terraform</li>
                         <li>Collaborated closely with development and QA teams to establish and maintain environments</li>
                         <li>Consolidated multiple Office 365 and Google Workspace environments into a single shared Office 365 tenant</li>
@@ -153,7 +153,7 @@
                         </div>
                     </div>
                     <ul>
-                        <li>Led the project to transition teams to remote work during the pandemic, ensuring uninterrupted productivity</li>
+                        <li>Helped move the company to remote work during the pandemic</li>
                         <li>Managed Office 365 including user provisioning, licensing, and security</li>
                         <li>Planned and executed the rollout of Microsoft Teams</li>
                         <li>Maintained Dynamics 365 instance including customizations and reporting</li>
@@ -326,14 +326,14 @@
                     It's static HTML on S3 served through CloudFront. The visitor counter below is a
                     live call to API Gateway, handled by a Lambda function that increments a count in
                     DynamoDB. All of the infrastructure is defined in CloudFormation, and every push
-                    to <code>main</code> kicks off CodePipeline to rebuild and redeploy, including
+                    to <code>main</code> triggers a CodeBuild job that syncs the site to S3 and invalidates the CDN, including
                     the change you're reading right now. It's not a one-off, either: I run a couple
                     of other sites on this same pattern.
                 </p>
 
                 <div class="diagram-scroll">
                     <svg class="diagram" viewBox="0 0 780 350" role="img"
-                         aria-label="Architecture diagram: browser requests the site from CloudFront backed by S3, and calls API Gateway, Lambda, and DynamoDB for the visitor counter. GitHub pushes trigger CodePipeline and CodeBuild, which deploy to S3. All AWS resources are defined in CloudFormation.">
+                         aria-label="Architecture diagram: browser requests the site from CloudFront backed by S3, and calls API Gateway, Lambda, and DynamoDB for the visitor counter. GitHub pushes trigger CodeBuild, which deploys to S3. All AWS resources are defined in CloudFormation.">
                         <defs>
                             <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                                 <path d="M0,0 L10,5 L0,10 z" class="diag-arrow"/>
@@ -389,8 +389,8 @@
                         <text x="90" y="310" class="diag-sub" text-anchor="middle">rpuffe/CRC</text>
 
                         <rect x="260" y="276" width="200" height="44" rx="8" class="diag-box"/>
-                        <text x="360" y="295" class="diag-label" text-anchor="middle">CodePipeline</text>
-                        <text x="360" y="310" class="diag-sub" text-anchor="middle">CodeBuild → s3 sync</text>
+                        <text x="360" y="295" class="diag-label" text-anchor="middle">CodeBuild</text>
+                        <text x="360" y="310" class="diag-sub" text-anchor="middle">validate → s3 sync → smoke test</text>
 
                         <path d="M160,298 H252" class="diag-line"/>
                         <text x="206" y="290" class="diag-sub" text-anchor="middle">git push</text>
@@ -442,7 +442,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>© <span id="year">2026</span> Robert Puffe · built with an AI pair programmer, deployed by pipeline</p>
+        <p>© <span id="year">2026</span> Robert Puffe · built with an AI pair programmer, deployed by CodeBuild</p>
     </footer>
 
     <!-- Visitor counter: API Gateway → Lambda → DynamoDB -->
