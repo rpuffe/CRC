@@ -6,6 +6,7 @@
             const saved = localStorage.getItem('theme');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+            document.documentElement.classList.add('js');
         })();
     </script>
     <meta charset="UTF-8">
@@ -20,10 +21,11 @@
     <meta property="og:description" content="How I built a repeatable AWS delivery path for small containerized applications.">
     <meta property="og:url" content="https://robertpuffe.com/projects.html">
     <meta property="og:type" content="article">
-    <link rel="stylesheet" href="styles.css?v=6">
+    <link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body>
     <header class="site-header">
+        <div class="scroll-progress" aria-hidden="true"></div>
         <a href="index.html" class="logo">rpuffe<span class="logo-at">@</span>aws<span class="logo-prompt">:~$</span></a>
         <nav class="header-nav">
             <a href="#demo">demo</a>
@@ -43,7 +45,8 @@
     </header>
 
     <main id="overview">
-        <section class="project-page-hero">
+        <section class="project-page-hero hero">
+            <div class="hero-bg" aria-hidden="true"></div>
             <div class="container">
                 <a href="index.html#projects" class="back-link">← back to resume</a>
                 <p class="project-status">reference platform · active development</p>
@@ -72,23 +75,23 @@
 
         <section>
             <div class="container">
-                <h2 class="section-title"><span class="hash">##</span> the problem</h2>
-                <p class="project-copy">
+                <h2 class="section-title" data-reveal><span class="hash">##</span> the problem</h2>
+                <p class="project-copy" data-reveal>
                     Generating an application is often faster than deciding how it should
                     authenticate to AWS, store Terraform state, pass security checks, and move safely
                     from development to production. I moved those decisions into one platform so
                     each app does not need its own delivery design.
                 </p>
                 <div class="project-summary-grid">
-                    <article class="summary-card">
+                    <article class="summary-card spotlight" data-reveal>
                         <h3>6m 38s fastest cold run</h3>
                         <p>Measured from a plain-language app specification to a working public HTTPS URL.</p>
                     </article>
-                    <article class="summary-card">
+                    <article class="summary-card spotlight" data-reveal>
                         <h3>short-lived AWS credentials</h3>
                         <p>GitHub exchanges repository identity for a scoped per-app role through OIDC. There are no stored AWS keys.</p>
                     </article>
-                    <article class="summary-card">
+                    <article class="summary-card spotlight" data-reveal>
                         <h3>same image in dev and prod</h3>
                         <p>Production receives the exact digest tested in development instead of rebuilding from the release tag.</p>
                     </article>
@@ -98,8 +101,8 @@
 
         <section id="demo">
             <div class="container">
-                <h2 class="section-title"><span class="hash">##</span> see it running</h2>
-                <p class="project-copy">
+                <h2 class="section-title" data-reveal><span class="hash">##</span> see it running</h2>
+                <p class="project-copy" data-reveal>
                     Golf is a small application I use to exercise Flightdeck's delivery path.
                     Changes merged to main deploy to development. A versioned release promotes the
                     exact image already tested there into production without rebuilding it.
@@ -118,13 +121,13 @@
 
         <section id="flightdeck-architecture">
             <div class="container">
-                <h2 class="section-title"><span class="hash">##</span> architecture</h2>
-                <p class="project-copy">
+                <h2 class="section-title" data-reveal><span class="hash">##</span> architecture</h2>
+                <p class="project-copy" data-reveal>
                     Flightdeck creates shared networking, routing, ECR, and GitHub OIDC once. Each
                     app gets its own deployment role, Terraform state path, ECS service, logs,
                     alarms, and DNS route.
                 </p>
-                <div class="diagram-scroll">
+                <div class="diagram-scroll" data-reveal>
                     <svg class="project-diagram" viewBox="0 0 900 420" role="img" aria-label="Flightdeck architecture: an application repository invokes reusable GitHub Actions, exchanges OIDC identity for a per-app AWS role, builds and scans an image in ECR, and deploys isolated Terraform infrastructure to private ECS tasks behind a shared application load balancer.">
                         <defs>
                             <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -171,14 +174,14 @@
                         <text x="572" y="327" class="diag-label" text-anchor="middle">dev → prod</text>
                         <text x="572" y="344" class="diag-sub" text-anchor="middle">same digest</text>
 
-                        <path d="M105,120 V177" class="diag-line"/>
-                        <path d="M190,214 H230 V84 H267" class="diag-line"/>
-                        <path d="M445,84 H492" class="diag-line"/>
-                        <path d="M645,84 H697" class="diag-line"/>
-                        <path d="M360,113 V187" class="diag-line"/>
-                        <path d="M445,224 H492" class="diag-line"/>
-                        <path d="M645,224 H697" class="diag-line"/>
-                        <path d="M572,253 V297" class="diag-line"/>
+                        <path d="M105,120 V177" class="diag-line flow"/>
+                        <path d="M190,214 H230 V84 H267" class="diag-line flow"/>
+                        <path d="M445,84 H492" class="diag-line flow"/>
+                        <path d="M645,84 H697" class="diag-line flow"/>
+                        <path d="M360,113 V187" class="diag-line flow"/>
+                        <path d="M445,224 H492" class="diag-line flow"/>
+                        <path d="M645,224 H697" class="diag-line flow"/>
+                        <path d="M572,253 V297" class="diag-line flow"/>
                     </svg>
                 </div>
             </div>
@@ -186,17 +189,17 @@
 
         <section id="controls">
             <div class="container">
-                <h2 class="section-title"><span class="hash">##</span> why I built it this way</h2>
+                <h2 class="section-title" data-reveal><span class="hash">##</span> why I built it this way</h2>
                 <div class="decision-grid">
-                    <article class="decision-card">
+                    <article class="decision-card spotlight" data-reveal>
                         <h3>ECS instead of Kubernetes</h3>
                         <p>These are small HTTP services. ECS gives me scheduling and AWS integration without making cluster administration part of the app contract.</p>
                     </article>
-                    <article class="decision-card">
+                    <article class="decision-card spotlight" data-reveal>
                         <h3>a contract before a portal</h3>
                         <p>I started with a versioned YAML manifest and reusable workflows. That let me prove the platform boundary before adding another interface to maintain.</p>
                     </article>
-                    <article class="decision-card">
+                    <article class="decision-card spotlight" data-reveal>
                         <h3>shared foundation, isolated apps</h3>
                         <p>Apps share networking and routing to control cost, but each gets scoped identity and state. Releases promote the same tested image digest instead of rebuilding it.</p>
                     </article>
@@ -206,17 +209,17 @@
 
         <section id="evidence">
             <div class="container">
-                <h2 class="section-title"><span class="hash">##</span> what I tested</h2>
+                <h2 class="section-title" data-reveal><span class="hash">##</span> what I tested</h2>
                 <div class="evidence-grid">
-                    <article class="evidence-card">
+                    <article class="evidence-card spotlight" data-reveal>
                         <h3>the complete delivery path</h3>
                         <p>I timed the path from an application specification to a public URL, including repository setup, image build, infrastructure, and deployment.</p>
                     </article>
-                    <article class="evidence-card">
+                    <article class="evidence-card spotlight" data-reveal>
                         <h3>multiple application shapes</h3>
                         <p>I deployed several independent apps through the same contract. That exposed reusable-platform problems a single sample app would have missed.</p>
                     </article>
-                    <article class="evidence-card">
+                    <article class="evidence-card spotlight" data-reveal>
                         <h3>failure-driven hardening</h3>
                         <p>Live deployments exposed missing replacement and cleanup permissions, overly broad OIDC trust, image-retention risk, and scaler error handling. I fixed those in the platform and added narrower controls or tests.</p>
                     </article>
@@ -226,9 +229,9 @@
 
         <section>
             <div class="container">
-                <h2 class="section-title"><span class="hash">##</span> boundaries and next steps</h2>
-                <div class="roadmap-card">
-                    <p class="project-copy">
+                <h2 class="section-title" data-reveal><span class="hash">##</span> boundaries and next steps</h2>
+                <div class="roadmap-card" data-reveal>
+                    <p class="project-copy" data-reveal>
                         This is a reference platform for small HTTP services, not a general hosting
                         platform. It currently assumes one container, one AWS region, cost-first task
                         counts, and limited recovery automation.
@@ -271,9 +274,8 @@
                     setTheme(event.matches ? 'dark' : 'light');
                 }
             });
-
-            document.getElementById('year').textContent = new Date().getFullYear();
         })();
     </script>
+    <script src="main.js?v=1"></script>
 </body>
 </html>
