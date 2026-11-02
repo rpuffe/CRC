@@ -112,7 +112,7 @@
                     <a href="https://golf-dev.fd.robertpuffe.com" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Open development ↗</a>
                 </div>
                 <p class="project-demo-note">
-                    Both services scale to zero overnight to control cost. If a link is unavailable,
+                    Both services sleep after 30 idle minutes to control cost. If a link is unavailable,
                     the <a href="https://wake.fd.robertpuffe.com" target="_blank" rel="noopener noreferrer">fleet status page</a>
                     can start it; startup usually takes about a minute.
                 </p>
@@ -128,7 +128,7 @@
                     alarms, and DNS route.
                 </p>
                 <div class="diagram-scroll" data-reveal>
-                    <svg class="project-diagram" viewBox="0 0 900 420" role="img" aria-label="Flightdeck architecture: an application repository invokes reusable GitHub Actions, exchanges OIDC identity for a per-app AWS role, builds and scans an image in ECR, and deploys isolated Terraform infrastructure to private ECS tasks behind a shared application load balancer.">
+                    <svg class="project-diagram" viewBox="0 0 900 420" role="img" aria-label="Flightdeck architecture: an application repository invokes reusable GitHub Actions, exchanges OIDC identity for a per-app AWS role, builds and scans an image in ECR, and deploys isolated Terraform infrastructure to ECS tasks that accept traffic only from a shared application load balancer.">
                         <defs>
                             <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                                 <path d="M0,0 L10,5 L0,10 z" class="diag-arrow"/>
@@ -164,7 +164,7 @@
 
                         <rect x="500" y="195" width="145" height="58" rx="8" class="diag-box"/>
                         <text x="572" y="218" class="diag-label" text-anchor="middle">ECS Fargate</text>
-                        <text x="572" y="237" class="diag-sub" text-anchor="middle">private tasks</text>
+                        <text x="572" y="237" class="diag-sub" text-anchor="middle">ALB-only ingress</text>
 
                         <rect x="705" y="195" width="135" height="58" rx="8" class="diag-box"/>
                         <text x="772" y="218" class="diag-label" text-anchor="middle">CloudWatch</text>
@@ -201,7 +201,7 @@
                     </article>
                     <article class="decision-card spotlight" data-reveal>
                         <h3>shared foundation, isolated apps</h3>
-                        <p>Apps share networking and routing to control cost, but each gets scoped identity and state. Releases promote the same tested image digest instead of rebuilding it.</p>
+                        <p>Apps share networking and routing to control cost, but each gets scoped identity and state. Tasks reach the internet directly instead of through a NAT instance and accept traffic only from the load balancer. Releases promote the same tested image digest instead of rebuilding it.</p>
                     </article>
                 </div>
             </div>
