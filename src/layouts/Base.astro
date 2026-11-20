@@ -1,0 +1,79 @@
+---
+import "@/styles/globals.css";
+import { ThemeToggle } from "@/components/ThemeToggle";
+
+interface Props {
+  title: string;
+  description: string;
+  ogDescription?: string;
+  path?: string;
+  ogType?: string;
+  nav: { href: string; label: string }[];
+}
+
+const { title, description, ogDescription = description, path = "", ogType = "website", nav } = Astro.props;
+const url = `https://robertpuffe.com${path}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>
+      // Set the theme before first paint so the page doesn't flash.
+      (function () {
+        var saved = null;
+        try { saved = localStorage.getItem("theme"); } catch (e) {}
+        var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.classList.toggle("dark", dark);
+      })();
+    </script>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href={url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:url" content={url} />
+    <meta property="og:type" content={ogType} />
+  </head>
+  <body class="min-h-screen">
+    <a
+      href="#main"
+      class="bg-background focus:ring-ring sr-only z-50 rounded-md px-3 py-2 text-sm focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:ring-2"
+      >Skip to content</a
+    >
+    <header class="print:hidden bg-background/85 sticky top-0 z-40 border-b backdrop-blur">
+      <div class="mx-auto flex h-14 max-w-4xl items-center gap-2 px-4 sm:px-6">
+        <a href="/index.html" class="mr-auto shrink-0 text-sm font-semibold tracking-tight">Robert Puffe</a>
+        <nav aria-label="Sections" class="hidden items-center sm:flex">
+          {
+            nav.map((item) => (
+              <a
+                href={item.href}
+                class="text-muted-foreground hover:text-foreground hover:bg-muted rounded-md px-3 py-1.5 text-sm transition-colors"
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+        <ThemeToggle client:load />
+      </div>
+    </header>
+
+    <main id="main" class="mx-auto max-w-4xl px-4 sm:px-6">
+      <slot />
+    </main>
+
+    <footer class="mt-8 border-t print:hidden">
+      <div class="text-muted-foreground mx-auto flex max-w-4xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-6 text-sm sm:px-6">
+        <p>© {new Date().getFullYear()} Robert Puffe</p>
+        <slot name="footer" />
+      </div>
+    </footer>
+  </body>
+</html>

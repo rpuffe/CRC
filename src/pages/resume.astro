@@ -1,0 +1,141 @@
+---
+import Base from "@/layouts/Base.astro";
+import { buttonVariants } from "@/components/ui/button";
+import { Download } from "lucide-react";
+import { profile, currentRole, earlierRoles, earlierExperience, flightdeck, skills } from "@/data/resume";
+
+const nav = [
+  { href: "/index.html", label: "Home" },
+  { href: "#experience", label: "Experience" },
+  { href: "#projects", label: "Projects" },
+  { href: "#skills", label: "Skills" },
+];
+
+const h2 = "text-primary border-b pb-1 text-sm font-semibold tracking-wide uppercase print:text-xs";
+const dates = "text-muted-foreground shrink-0 font-mono text-xs tabular-nums sm:text-sm print:text-xs";
+---
+
+<Base
+  title="Résumé | Robert Puffe"
+  description="Résumé of Robert Puffe, DevOps Lead: AWS, Terraform, and CI/CD for two HIPAA-regulated healthcare platforms."
+  path="/resume.html"
+  nav={nav}
+>
+  <article class="mx-auto max-w-3xl py-10 sm:py-14 print:max-w-none print:py-0">
+    <header>
+      <div class="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h1 class="text-3xl font-semibold tracking-tight print:text-2xl">{profile.name}</h1>
+          <p class="mt-1 text-lg print:text-base">
+            <span class="font-medium">{profile.title}</span>
+            <span class="text-muted-foreground"> · {profile.focus.join(" · ")}</span>
+          </p>
+        </div>
+        <a href={profile.resumePdf} target="_blank" rel="noopener" class={buttonVariants({ variant: "outline" }) + " print:hidden"}>
+          <Download aria-hidden="true" /> PDF
+        </a>
+      </div>
+      <p class="text-muted-foreground mt-2 text-sm">
+        Jamestown, ND (remote) · <a href={`mailto:${profile.email}`}>{profile.email}</a> ·{" "}
+        <a href={profile.linkedin}>linkedin.com/in/robert-puffe-aa092a6a</a> ·{" "}
+        <a href="https://robertpuffe.com">robertpuffe.com</a>
+      </p>
+    </header>
+
+    <section class="mt-6 print:mt-4">
+      <h2 class={h2}>Summary</h2>
+      <p class="mt-3 leading-relaxed text-pretty print:mt-2">
+        DevOps Lead at a healthcare SaaS company, ten years there and doing DevOps work since 2021, first as System
+        Administrator. I lead a two-person team supporting 40+ engineers and own the AWS infrastructure and CI/CD behind
+        two HIPAA-regulated production platforms, built on ECS Fargate, Terraform, GitHub Actions, and CodePipeline. My
+        focus is platform engineering: infrastructure as code, automation, and self-service tooling that lets engineers
+        ship without waiting on DevOps.
+      </p>
+    </section>
+
+    <section id="experience" class="mt-8 print:mt-4">
+      <h2 class={h2}>Experience</h2>
+
+      <div class="mt-4 flex flex-wrap items-baseline justify-between gap-x-4 print:mt-2">
+        <h3 class="text-lg font-semibold print:text-base">
+          {currentRole.company}
+          <span class="text-muted-foreground text-sm font-normal"> · {currentRole.companyMeta}</span>
+        </h3>
+        <p class={dates}>{currentRole.companyDates}</p>
+      </div>
+
+      <div class="mt-3 print:mt-1.5">
+        <div class="flex items-baseline justify-between gap-x-4">
+          <h4 class="font-semibold">{currentRole.title}</h4>
+          <p class={dates}>{currentRole.dates}</p>
+        </div>
+        <p class="mt-2 leading-relaxed text-pretty print:mt-1">{currentRole.scope}</p>
+        <ul class="mt-3 list-disc space-y-2 pl-5 leading-relaxed print:mt-1.5 print:space-y-1">
+          {currentRole.bullets.map((item) => <li>{item.replace(/\.$/, "")}.</li>)}
+        </ul>
+      </div>
+
+      {
+        earlierRoles.map((role) => (
+          <div class="mt-6 break-inside-avoid print:mt-3">
+            <div class="flex items-baseline justify-between gap-x-4">
+              <h4 class="font-semibold">{role.title}</h4>
+              <p class={dates}>{role.dates}</p>
+            </div>
+            <ul class="mt-2 list-disc space-y-2 pl-5 leading-relaxed print:mt-1 print:space-y-1">
+              {role.items.map((item) => <li>{item}.</li>)}
+            </ul>
+          </div>
+        ))
+      }
+
+      <div class="mt-8 break-inside-avoid print:mt-4">
+        <div class="flex items-baseline justify-between gap-x-4">
+          <h3 class="text-lg font-semibold print:text-base">Earlier experience</h3>
+          <p class={dates}>{earlierExperience.dates}</p>
+        </div>
+        <ul class="mt-2 space-y-1 leading-relaxed print:mt-1">
+          {
+            earlierExperience.items.map((item) => (
+              <li>
+                <span class="font-semibold">{item.employer}</span> · {item.title}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section id="projects" class="mt-8 break-inside-avoid print:mt-4">
+      <h2 class={h2}>Projects</h2>
+      <div class="mt-4 flex flex-wrap items-baseline justify-between gap-x-4 print:mt-2">
+        <h3 class="font-semibold">
+          {flightdeck.name}
+          <span class="text-muted-foreground font-normal"> · personal project</span>
+        </h3>
+        <p class="text-sm">
+          <a class="link" href="/projects.html">robertpuffe.com/projects.html</a>
+          <span class="text-muted-foreground"> · </span>
+          <a class="link" href={flightdeck.repo}>github.com/rpuffe/flightdeck</a>
+        </p>
+      </div>
+      <p class="mt-2 leading-relaxed text-pretty print:mt-1">
+        {flightdeck.plain} {flightdeck.lead} {flightdeck.facts} {flightdeck.credit}
+      </p>
+    </section>
+
+    <section id="skills" class="mt-8 break-inside-avoid print:mt-4">
+      <h2 class={h2}>Skills</h2>
+      <dl class="mt-4 space-y-2 print:mt-2 print:space-y-1">
+        {
+          skills.map((row) => (
+            <div class="leading-relaxed">
+              <dt class="inline font-semibold">{row.group}: </dt>
+              <dd class="inline">{row.items.join(", ")}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+  </article>
+</Base>

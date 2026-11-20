@@ -1,0 +1,266 @@
+---
+import Base from "@/layouts/Base.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import FlightdeckDiagram from "@/components/FlightdeckDiagram.astro";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { buttonVariants } from "@/components/ui/button";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
+
+const repo = "https://github.com/rpuffe/flightdeck";
+const spec = `${repo}/blob/main/spec-docs/flightdeck-spec.md`;
+const threatModel = `${repo}/blob/main/spec-docs/threat-model.md`;
+
+const nav = [
+  { href: "#demo", label: "Demo" },
+  { href: "#architecture", label: "Architecture" },
+  { href: "#decisions", label: "Decisions" },
+  { href: "#hardening", label: "Hardening" },
+  { href: "/resume.html", label: "Résumé" },
+];
+
+const tags = ["AWS", "Terraform", "ECS Fargate", "ECR", "GitHub Actions", "OIDC", "Trivy", "Checkov"];
+
+const results = [
+  {
+    value: "6m 38s",
+    title: "Best cold run",
+    body: "Measured from a plain-language app specification to a verified public HTTPS URL, with zero CI failures.",
+  },
+  {
+    value: "No stored keys",
+    title: "Short-lived AWS credentials",
+    body: "GitHub exchanges repository identity for a scoped per-app role through OIDC.",
+  },
+  {
+    value: "One image",
+    title: "Same image in dev and prod",
+    body: "Production receives the exact digest tested in development instead of rebuilding from the release tag.",
+  },
+];
+
+const decisions = [
+  {
+    title: "ECS instead of Kubernetes",
+    body: "These are small HTTP services. ECS gives me scheduling and AWS integration without making cluster administration part of the app contract.",
+  },
+  {
+    title: "A contract before a portal",
+    body: "I started with a versioned YAML manifest and reusable workflows. That let me prove the platform boundary before adding another interface to maintain.",
+  },
+  {
+    title: "Shared foundation, isolated apps",
+    body: "Apps share networking and routing to control cost, but each gets scoped identity and state. Tasks reach the internet directly instead of through a NAT instance and accept traffic only from the load balancer.",
+  },
+];
+
+const hardening = [
+  "Missing replacement and cleanup permissions",
+  "Overly broad OIDC trust",
+  "Image-retention risk",
+  "Scaler error handling",
+];
+
+const tested = [
+  {
+    title: "The complete delivery path",
+    body: "I timed the path from an application specification to a public URL, including repository setup, image build, infrastructure, and deployment.",
+  },
+  {
+    title: "Multiple application shapes",
+    body: "I deployed several independent apps through the same contract. That exposed reusable-platform problems a single sample app would have missed.",
+  },
+];
+
+const next = [
+  "Prove the full create, update, promotion, and destroy lifecycle with a disposable app",
+  "Add service monitoring and read-only Terraform drift reporting",
+  "Rehearse recovery and publish durable, sanitized evidence",
+];
+---
+
+<Base
+  title="Flightdeck Case Study | Robert Puffe"
+  description="How Robert Puffe built Flightdeck: an AWS application delivery reference platform using Terraform, ECS Fargate, GitHub Actions, and OIDC."
+  ogDescription="How I built a repeatable AWS delivery path for small containerized applications."
+  path="/projects.html"
+  ogType="article"
+  nav={nav}
+>
+  <section class="py-10 sm:py-16">
+    <a href="/index.html#flightdeck" class="text-muted-foreground hover:text-foreground inline-flex items-center gap-1 text-sm">
+      <ArrowLeft className="size-4" aria-hidden="true" /> Back to home
+    </a>
+    <p class="text-primary mt-6 text-sm font-medium">Personal reference platform · active development</p>
+    <h1 class="mt-1 text-3xl font-semibold tracking-tight sm:text-4xl">Flightdeck</h1>
+    <p class="mt-4 max-w-2xl text-lg leading-relaxed text-pretty sm:text-xl">
+      A repeatable path into AWS for small containerized apps.
+    </p>
+    <p class="text-muted-foreground mt-3 max-w-2xl leading-relaxed text-pretty">
+      An app supplies a Dockerfile and a small YAML manifest. Reusable workflows handle validation, security checks,
+      infrastructure, HTTPS routing, and promotion.
+    </p>
+    <p class="text-muted-foreground mt-3 max-w-2xl leading-relaxed text-pretty">
+      Built on my own time. I wrote the specs and made the architecture decisions; the implementation was done with
+      Claude Code and Codex.
+    </p>
+    <ul class="mt-5 flex flex-wrap gap-1.5" aria-label="Flightdeck technologies">
+      {tags.map((tag) => <li><Badge variant="secondary">{tag}</Badge></li>)}
+    </ul>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a href={repo} target="_blank" rel="noopener noreferrer" class={buttonVariants({ size: "lg" })}>
+        View repository <ArrowUpRight aria-hidden="true" />
+      </a>
+      <a href={spec} target="_blank" rel="noopener noreferrer" class={buttonVariants({ variant: "outline", size: "lg" })}>
+        Read the specification <ArrowUpRight aria-hidden="true" />
+      </a>
+    </div>
+  </section>
+
+  <Separator />
+
+  <section class="py-10 sm:py-14">
+    <SectionHeading title="The problem" />
+    <p class="max-w-3xl leading-relaxed text-pretty">
+      Generating an application is often faster than deciding how it should authenticate to AWS, store Terraform state,
+      pass security checks, and move safely from development to production. I moved those decisions into one platform so
+      each app does not need its own delivery design.
+    </p>
+    <dl class="bg-border mt-8 grid gap-px overflow-hidden rounded-xl border sm:grid-cols-3">
+      {
+        results.map((item) => (
+          <div class="bg-card p-5">
+            <dd class="font-mono text-xl font-semibold tracking-tight">{item.value}</dd>
+            <dt class="mt-1 text-sm font-semibold">{item.title}</dt>
+            <dd class="text-muted-foreground mt-1 text-sm leading-relaxed">{item.body}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <Separator />
+
+  <section id="demo" class="py-10 sm:py-14">
+    <SectionHeading title="See it running" />
+    <p class="max-w-3xl leading-relaxed text-pretty">
+      Golf is a small application I use to exercise Flightdeck's delivery path. Changes merged to main deploy to
+      development. A versioned release promotes the exact image already tested there into production without rebuilding
+      it.
+    </p>
+    <div class="mt-5 flex flex-wrap gap-3">
+      <a href="https://golf.fd.robertpuffe.com" target="_blank" rel="noopener noreferrer" class={buttonVariants()}>
+        Open production <ArrowUpRight aria-hidden="true" />
+      </a>
+      <a href="https://golf-dev.fd.robertpuffe.com" target="_blank" rel="noopener noreferrer" class={buttonVariants({ variant: "outline" })}>
+        Open development <ArrowUpRight aria-hidden="true" />
+      </a>
+    </div>
+    <p class="text-muted-foreground mt-4 max-w-3xl text-sm leading-relaxed">
+      Both services sleep after 30 idle minutes to control cost. If a link is unavailable, the{" "}
+      <a class="link" href="https://wake.fd.robertpuffe.com" target="_blank" rel="noopener noreferrer">fleet status page</a>{" "}
+      can start it; startup usually takes about a minute.
+    </p>
+  </section>
+
+  <Separator />
+
+  <section id="architecture" class="py-10 sm:py-14">
+    <SectionHeading title="Architecture" />
+    <p class="max-w-3xl leading-relaxed text-pretty">
+      Flightdeck creates shared networking, routing, ECR, and GitHub OIDC once. Each app gets its own deployment role,
+      Terraform state path, ECS service, logs, alarms, and DNS route.
+    </p>
+    <div class="mt-6 overflow-x-auto rounded-xl border p-4">
+      <FlightdeckDiagram />
+    </div>
+  </section>
+
+  <Separator />
+
+  <section id="decisions" class="py-10 sm:py-14">
+    <SectionHeading title="Why I built it this way" />
+    <div class="grid gap-4 md:grid-cols-3">
+      {
+        decisions.map((item) => (
+          <Card className="py-0">
+            <CardContent className="p-5">
+              <h3 class="font-semibold">{item.title}</h3>
+              <p class="text-muted-foreground mt-2 text-sm leading-relaxed">{item.body}</p>
+            </CardContent>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+
+  <Separator />
+
+  <section id="hardening" class="py-10 sm:py-14">
+    <SectionHeading title="What broke, and what I tested" />
+    <div class="grid gap-8 md:grid-cols-2">
+      <div>
+        <h3 class="font-semibold">Failures that hardened the platform</h3>
+        <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
+          Live deployments exposed problems I fixed in the platform, adding narrower controls or tests for each:
+        </p>
+        <ul class="mt-3 space-y-2">
+          {
+            hardening.map((item) => (
+              <li class="relative pl-5 text-sm leading-relaxed">
+                <span class="bg-primary/70 absolute top-[0.65em] left-0 size-1.5 rounded-full" aria-hidden="true" />
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-4 text-sm">
+          <a class="link" href={threatModel} target="_blank" rel="noopener noreferrer">Read the threat model</a>
+        </p>
+      </div>
+      <div class="space-y-5">
+        {
+          tested.map((item) => (
+            <div>
+              <h3 class="font-semibold">{item.title}</h3>
+              <p class="text-muted-foreground mt-2 text-sm leading-relaxed">{item.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <Separator />
+
+  <section class="py-10 sm:py-14">
+    <SectionHeading title="Boundaries and next steps" />
+    <p class="max-w-3xl leading-relaxed text-pretty">
+      This is a reference platform for small HTTP services, not a general hosting platform. It currently assumes one
+      container, one AWS region, cost-first task counts, and limited recovery automation.
+    </p>
+    <ul class="text-muted-foreground mt-4 max-w-3xl list-disc space-y-1.5 pl-5 leading-relaxed">
+      {next.map((item) => <li>{item}</li>)}
+    </ul>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a href={repo} target="_blank" rel="noopener noreferrer" class={buttonVariants()}>
+        View source <ArrowUpRight aria-hidden="true" />
+      </a>
+      <a href={spec} target="_blank" rel="noopener noreferrer" class={buttonVariants({ variant: "outline" })}>
+        Design specification <ArrowUpRight aria-hidden="true" />
+      </a>
+      <a href={threatModel} target="_blank" rel="noopener noreferrer" class={buttonVariants({ variant: "outline" })}>
+        Threat model <ArrowUpRight aria-hidden="true" />
+      </a>
+    </div>
+  </section>
+
+  <Fragment slot="footer">
+    <p class="flex gap-4">
+      <a class="hover:text-foreground underline underline-offset-4" href="/index.html">Home</a>
+      <a class="hover:text-foreground underline underline-offset-4" href="/resume.html">Résumé</a>
+      <a class="hover:text-foreground underline underline-offset-4" href={repo} target="_blank" rel="noopener noreferrer">Source</a>
+    </p>
+  </Fragment>
+</Base>

@@ -6,12 +6,20 @@ name: validate-site
 on:
   pull_request:
     paths:
-      - "site/**"
+      - "src/**"
+      - "public/**"
+      - "package.json"
+      - "package-lock.json"
+      - "astro.config.mjs"
       - "scripts/validate.sh"
   push:
     branches: [main]
     paths:
-      - "site/**"
+      - "src/**"
+      - "public/**"
+      - "package.json"
+      - "package-lock.json"
+      - "astro.config.mjs"
       - "scripts/validate.sh"
 
 jobs:
@@ -20,10 +28,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Build static site
+        run: |
+          npm ci
+          npm run build
+
       - name: Validate static site
         env:
           # Keep in parity with the CloudFormation ExpectedContent parameter.
           EXPECTED_CONTENT: "Robert"
+          SRC_DIR: dist
         run: bash scripts/validate.sh
 
       - name: Lint shell scripts

@@ -5,11 +5,19 @@ version: 0.2
 # environment, which is set by the CloudFormation stack.
 env:
   variables:
-    SRC_DIR: site
+    SRC_DIR: dist
 
 phases:
+  install:
+    runtime-versions:
+      nodejs: 22
+    commands:
+      - npm ci
+
   pre_build:
     commands:
+      # Astro renders the pages to static HTML in dist/; validate what will ship.
+      - npm run build
       - bash scripts/validate.sh
 
   build:
