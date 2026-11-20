@@ -32,16 +32,16 @@ export const selectedWork = [
       "I traced it to one query in a job that runs every 10 minutes and added the missing index. Read I/O fell about 70% and capacity use about 60%.",
   },
   {
-    title: "Self-service instead of tickets",
+    title: "Routine deploys and user setup without a DevOps ticket",
     problem: "Routine requests such as lower-environment deploys and user provisioning waited on a two-person DevOps team.",
     change:
       "I built a CLI that lets engineering managers deploy to lower environments, a tool that lets support staff provision users, and on-demand preview environments.",
   },
   {
     title: "QA reads AWS logs without a developer",
-    problem: "Non-technical QA staff had no practical way to read AWS logs or match them to the code they were testing.",
+    problem: "QA had no practical way to read AWS logs or match them to the code they were testing.",
     change:
-      "I built a Claude Code plugin with scoped IAM roles, a CloudWatch MCP server, and a guided setup that clones the repos and loads context on our environments. QA now identifies defects on their own.",
+      "I built a Claude Code plugin: IAM roles, plus a setup prompt that installs a CloudWatch MCP server, clones the repos, and loads context on our environments. QA can now do this without a developer.",
   },
 ];
 
@@ -63,18 +63,17 @@ export const currentRole = {
   title: "DevOps Engineer, promoted to DevOps Lead (Apr 2026)",
   dates: "Mar 2024 – Present",
   scope:
-    "Lead of a two-person team and primary owner of the AWS infrastructure behind two HIPAA-regulated production platforms: about 30 services across 8 accounts and 10 environments. I set DevOps priorities, make the architecture decisions, coordinate releases, and am the primary production escalation.",
+    "DevOps Lead on a two-person team and primary owner of the AWS infrastructure: about 30 services across 8 accounts and 10 environments. I set DevOps priorities, make the architecture decisions, and coordinate releases.",
   bullets: [
     "Cut about 20 minutes from every production deploy by rebuilding the pipelines as reusable Terraform modules with separate build and deploy stages. Builds now finish before database migrations start, migrations run as their own stage, and tests moved to pull requests.",
     "Cut Aurora spend by an estimated $10K a month: a cost review led me to one query in a job running every 10 minutes, and adding the missing index dropped read I/O about 70% and ACU use about 60%.",
     "Took routine requests off the DevOps queue with self-service tooling: a CLI that lets engineering managers deploy to lower environments, a tool that lets support staff provision users, and on-demand preview environments triggered from GitHub Actions.",
-    "Built a Claude Code plugin that lets non-technical QA staff read AWS logs against the code under test and identify defects on their own: scoped IAM roles, a CloudWatch MCP server, and a guided setup that clones the repos and loads context on our environments.",
+    "Take security hotfixes from fix to production as a regular part of the job. In one, a Java CVE affecting every backend microservice was fixed in production within five hours of reaching me: I found a runtime flag that stops Java using the affected code, profiled it in lower environments, and coordinated QA, release, and product to ship it.",
+    "Primary escalation for production incidents. A typical one: on a Sunday support call I traced an unresponsive production service to high CPU and restarted the task, then profiled it and pulled logs so developers got a ticket with the evidence for a permanent fix.",
+    "Built a Claude Code plugin so QA can read AWS logs alongside the code under test without pulling in a developer: I created the IAM roles and wrote a setup prompt that installs a CloudWatch MCP server, clones the repos, and loads context on our environments and where the logs are. Also set up automated AI code review for the division's engineers.",
     "Turned the half-day, hands-on job of restoring production data into staging environments into an unattended one-hour pipeline.",
-    "Remediate vulnerabilities end to end: find the fix, prove it in lower environments, and coordinate QA, release, and product to ship it as a hotfix. A recent Java CVE affecting every backend microservice was fixed in production within five hours of reaching me.",
-    "Handle production incidents as primary escalation, including weekends: restore service first, then profile and pull logs so developers get a ticket with the evidence for a permanent fix, as with a recent service made unresponsive by CPU saturation.",
-    "Own branching strategy and release management across the GitHub organization, with per-service releases across 10 environments and a deployment tracker (Lambda, CodePipeline events) that updates Jira and notifies Teams.",
-    "Planned the migration of production infrastructure from AWS Copilot to Terraform, choosing a migrate-first approach that converts services module by module.",
-    "Set up automated AI code review for the division's engineers.",
+    "Own branching strategy and release management across the GitHub organization, with per-service releases across 10 environments and a deployment tracker (Lambda, CodePipeline events) that updates Jira and notifies Teams, so nobody has to chase release status.",
+    "Set the approach for the planned move of production infrastructure from AWS Copilot to Terraform: migrate first, converting services module by module.",
   ],
 };
 
@@ -85,7 +84,6 @@ export const earlierRoles = [
     items: [
       "Brought DevOps in-house from the contracting firm that had built and run the whole platform, moving infrastructure management, pipelines, and day-to-day operations to Eldermark staff",
       "Migrated workloads to AWS using EC2, S3, Transfer Family, and Terraform",
-      "Consolidated multiple Office 365 and Google Workspace environments into a single Office 365 tenant",
     ],
   },
   {

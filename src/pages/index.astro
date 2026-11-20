@@ -1,7 +1,6 @@
 ---
 import Base from "@/layouts/Base.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
-import PipelineStrip from "@/components/PipelineStrip.astro";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -24,7 +23,8 @@ const nav = [
   nav={nav}
 >
   <!-- Intro: who, what, at what scale, and where to go next -->
-  <section class="py-10 sm:py-16">
+  <section class="relative isolate py-10 sm:py-16">
+    <div class="hero-backdrop" aria-hidden="true"></div>
     <div class="flex items-center gap-4">
       <img
         src="/robert.jpg"
@@ -57,7 +57,7 @@ const nav = [
     </div>
   </section>
 
-  <PipelineStrip />
+  <Separator />
 
   <!-- Selected work: the problem, then what I did -->
   <section id="work" class="py-10 sm:py-14">
