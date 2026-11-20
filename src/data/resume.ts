@@ -90,6 +90,7 @@ export const earlierRoles = [
     title: "IT Specialist",
     dates: "Sep 2016 – May 2021",
     items: [
+      "Ran Windows Server and network infrastructure across datacenters, offices, and cloud, and maintained customer databases, including backups",
       "Led the technical side of moving staff to remote work during the pandemic, and wrote the documentation for it",
       "Joined sales and customer calls to answer technical questions, demonstrate the product, and support customer migration projects",
     ],
