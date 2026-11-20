@@ -1,0 +1,55 @@
+<svg class="diagram min-w-[680px] w-full" viewBox="0 0 900 420" role="img" aria-label="Flightdeck architecture: an application repository invokes reusable GitHub Actions, exchanges OIDC identity for a per-app AWS role, builds and scans an image in ECR, and deploys isolated Terraform infrastructure to ECS tasks that accept traffic only from a shared application load balancer.">
+                        <defs>
+                            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                <path d="M0,0 L10,5 L0,10 z" class="arrowhead"/>
+                            </marker>
+                        </defs>
+
+                        <rect x="245" y="18" width="625" height="365" rx="12" class="boundary"/>
+                        <text x="262" y="368" class="note">AWS account · Terraform-managed Flightdeck resources</text>
+
+                        <rect x="20" y="62" width="170" height="58" rx="8" class="box"/>
+                        <text x="105" y="85" class="label" text-anchor="middle">app repository</text>
+                        <text x="105" y="104" class="sub" text-anchor="middle">Dockerfile + manifest</text>
+
+                        <rect x="20" y="185" width="170" height="58" rx="8" class="box"/>
+                        <text x="105" y="208" class="label" text-anchor="middle">reusable workflow</text>
+                        <text x="105" y="227" class="sub" text-anchor="middle">validate · scan · deploy</text>
+
+                        <rect x="275" y="55" width="170" height="58" rx="8" class="box"/>
+                        <text x="360" y="78" class="label" text-anchor="middle">GitHub OIDC role</text>
+                        <text x="360" y="97" class="sub" text-anchor="middle">exact repo · per app</text>
+
+                        <rect x="500" y="55" width="145" height="58" rx="8" class="box"/>
+                        <text x="572" y="78" class="label" text-anchor="middle">Amazon ECR</text>
+                        <text x="572" y="97" class="sub" text-anchor="middle">scanned image</text>
+
+                        <rect x="705" y="55" width="135" height="58" rx="8" class="box"/>
+                        <text x="772" y="78" class="label" text-anchor="middle">Terraform state</text>
+                        <text x="772" y="97" class="sub" text-anchor="middle">isolated path</text>
+
+                        <rect x="275" y="195" width="170" height="58" rx="8" class="box"/>
+                        <text x="360" y="218" class="label" text-anchor="middle">shared ALB + DNS</text>
+                        <text x="360" y="237" class="sub" text-anchor="middle">HTTPS routing</text>
+
+                        <rect x="500" y="195" width="145" height="58" rx="8" class="box"/>
+                        <text x="572" y="218" class="label" text-anchor="middle">ECS Fargate</text>
+                        <text x="572" y="237" class="sub" text-anchor="middle">ALB-only ingress</text>
+
+                        <rect x="705" y="195" width="135" height="58" rx="8" class="box"/>
+                        <text x="772" y="218" class="label" text-anchor="middle">CloudWatch</text>
+                        <text x="772" y="237" class="sub" text-anchor="middle">logs + alarms</text>
+
+                        <rect x="500" y="305" width="145" height="48" rx="8" class="box"/>
+                        <text x="572" y="327" class="label" text-anchor="middle">dev → prod</text>
+                        <text x="572" y="344" class="sub" text-anchor="middle">same digest</text>
+
+                        <path d="M105,120 V177" class="line"/>
+                        <path d="M190,214 H230 V84 H267" class="line"/>
+                        <path d="M445,84 H492" class="line"/>
+                        <path d="M645,84 H697" class="line"/>
+                        <path d="M360,113 V187" class="line"/>
+                        <path d="M445,224 H492" class="line"/>
+                        <path d="M645,224 H697" class="line"/>
+                        <path d="M572,253 V297" class="line"/>
+                    </svg>

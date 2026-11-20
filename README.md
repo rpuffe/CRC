@@ -6,7 +6,7 @@ Live site: [https://robertpuffe.com](https://robertpuffe.com)
 
 ## Architecture
 
-The site is static HTML and CSS in S3, served through CloudFront with TLS from ACM and DNS in Route 53. 
+The site is built with [Astro](https://astro.build), Tailwind CSS, and [shadcn/ui](https://ui.shadcn.com) components, and rendered to static HTML at build time. The output is stored in S3 and served through CloudFront with TLS from ACM and DNS in Route 53. 
 
 The visitor counter is an API Gateway HTTP API in front of a small Python Lambda that increments a count in DynamoDB. 
 
@@ -14,27 +14,33 @@ All infrastructure is defined in the CloudFormation template `deploy/template/CR
 
 ## How deploys work
 
-When changes to `site/` are pushed to `main`, a webhook triggers the CodeBuild project, which runs `buildspec.yml` to copy the files to S3 and trigger a CloudFront invalidation.
+When changes to the site source (`src/`, `public/`, or the build config) are pushed to `main`, a webhook triggers the CodeBuild project. It runs `buildspec.yml`: `npm ci`, `npm run build`, validate `dist/`, sync it to S3, invalidate CloudFront, and smoke-test the live site.
 
 Infrastructure deploys through CloudFormation Git sync. After the initial creation of the stack, any changes pushed to the `deploy/` directory trigger an update to the stack.
 
 ## Repo layout
 
 ```
-site/index.html                # resume homepage
-site/projects.html             # project case studies
-site/styles.css                # shared responsive dark/light theme
-site/                          # favicons and image assets
+src/pages/index.astro          # resume homepage
+src/pages/projects.astro       # Flightdeck case study (built as /projects.html)
+src/data/resume.ts             # all resume copy, separate from layout
+src/layouts/Base.astro         # shared head, header, footer
+src/components/ui/             # shadcn/ui components
+src/styles/globals.css         # Tailwind + light/dark theme tokens
+public/                        # favicons, photo, resume PDF (copied as-is)
 deploy/template/               # CloudFormation template (all infrastructure)
 deploy/deployparams.yml        # stack parameters (CloudFormation Git sync)
-buildspec.yml                  # CodeBuild: sync site/ to S3 + invalidate CDN
+buildspec.yml                  # CodeBuild: build, sync dist/ to S3, invalidate CDN
 ```
 
 ## Running locally
 
 ```
-python3 -m http.server 4173 --directory site
+npm install
+npm run dev
 ```
+
+Requires Node 22.23.4 or newer. `npm run build` writes the deployable site to `dist/`.
 
 Then open http://localhost:4173. The visitor counter API allows `localhost:4173` through CORS, so the counter works locally too.
 

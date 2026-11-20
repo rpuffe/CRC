@@ -3,12 +3,12 @@
 # Pre-deploy validation for a static site directory.
 # Generic and reusable: configured entirely through environment variables.
 #
-#   SRC_DIR          directory to validate            (default: site)
+#   SRC_DIR          directory to validate            (default: dist)
 #   EXPECTED_CONTENT string that must appear in index.html, if set
 #
 set -euo pipefail
 
-SRC_DIR="${SRC_DIR:-site}"
+SRC_DIR="${SRC_DIR:-dist}"
 
 fail() { echo "FAIL: $*" >&2; exit 1; }
 

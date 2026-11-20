@@ -1,0 +1,97 @@
+---
+// The one decorative element on the site: the deploy pipeline from the first
+// work card, drawn once on load. Pure CSS, static when motion is reduced.
+const stages = ["Build", "Migrate", "Deploy", "Verify"];
+---
+
+<div class="pipeline" role="img" aria-label={`Deploy pipeline stages: ${stages.join(", ")}`}>
+  <div class="track"><div class="fill"></div></div>
+  <ol>
+    {
+      stages.map((stage, index) => (
+        <li style={`--i:${index}`}>
+          <span class="node" />
+          <span class="label">{stage}</span>
+        </li>
+      ))
+    }
+  </ol>
+</div>
+
+<style>
+  .pipeline {
+    --step: 0.55s;
+    position: relative;
+    padding-block: 0.25rem;
+  }
+  .track {
+    position: absolute;
+    top: calc(0.25rem + 5px);
+    left: 6px;
+    right: 6px;
+    height: 1px;
+    background: var(--border);
+  }
+  .fill {
+    height: 100%;
+    background: var(--primary);
+    transform-origin: left;
+    animation: draw calc(var(--step) * 3) linear 0.4s backwards;
+  }
+  ol {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+  }
+  li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  li:first-child {
+    align-items: flex-start;
+  }
+  li:last-child {
+    align-items: flex-end;
+  }
+  .node {
+    width: 11px;
+    height: 11px;
+    border-radius: 9999px;
+    border: 1.5px solid var(--primary);
+    background: var(--primary);
+    box-shadow: 0 0 0 4px var(--background);
+    animation: light 0.3s ease-out calc(0.4s + var(--step) * var(--i)) backwards;
+  }
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--foreground);
+    animation: label 0.3s ease-out calc(0.4s + var(--step) * var(--i)) backwards;
+  }
+  @keyframes draw {
+    from {
+      transform: scaleX(0);
+    }
+  }
+  @keyframes light {
+    from {
+      background: var(--background);
+      border-color: var(--border);
+      transform: scale(0.8);
+    }
+  }
+  @keyframes label {
+    from {
+      color: var(--muted-foreground);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fill,
+    .node,
+    .label {
+      animation: none;
+    }
+  }
+</style>

@@ -3,8 +3,11 @@
   "configurations": [
     {
       "name": "resume-site",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "4173", "--directory", "site"],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 4173
     }
   ]

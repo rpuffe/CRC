@@ -186,7 +186,7 @@ Resources:
             - Type: HEAD_REF
               Pattern: ^refs/heads/main$
             - Type: FILE_PATH
-              Pattern: ^site/
+              Pattern: ^(src/|public/|scripts/|package(-lock)?\.json$|astro\.config\.mjs$|buildspec\.yml$)
       SourceVersion: main
       Tags:
         - Key: Name
